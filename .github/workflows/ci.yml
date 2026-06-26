@@ -1,9 +1,18 @@
 name: CI
 
 on:
-  push:
-    branches: [main, "version/**"]
-  pull_request:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Raison du déclenchement manuel"
+        required: false
+        default: "Test manuel"
+
+# CI automatique désactivée pendant le développement v0.1.0.
+# Réactiver en remettant :
+#   push:
+#     branches: [main, "version/**"]
+#   pull_request:
 
 concurrency:
   group: ci-${{ github.ref }}

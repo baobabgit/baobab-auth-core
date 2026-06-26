@@ -1,0 +1,24 @@
+version: "0.1.0"
+status: IN_DEVELOPMENT
+started_at: "2026-06-26"
+target_release_date: null
+integration_required: false
+
+backlogs:
+  - BL-010-001
+  - BL-010-002
+  - BL-010-003
+  - BL-010-004
+  - BL-010-005
+  - BL-010-006
+  - BL-010-007
+  - BL-010-008
+
+quality_gates:
+  black: pending
+  ruff: pending
+  mypy: pending
+  bandit: pending
+  coverage: pending
+  build: pending
+  twine: pending

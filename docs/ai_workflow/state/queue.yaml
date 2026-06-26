@@ -8,13 +8,61 @@
 #   6. effort raisonnable
 #   7. absence de blocage d'intégration
 
-version_active: null
+version_active: v0.1.0
 
-queue: []
-# Exemple d'entrée :
-# - id: BL-001
-#   title: "Initialiser la structure du package"
-#   version_target: v0.1.0
-#   priority: P0
-#   status: TODO
-#   depends_on: []
+queue:
+  - id: BL-010-001
+    title: "Initialiser le package baobab-auth-core"
+    version_target: v0.1.0
+    priority: P0
+    status: IN_PROGRESS
+    depends_on: []
+
+  - id: BL-010-002
+    title: "Implémenter les value objects"
+    version_target: v0.1.0
+    priority: P0
+    status: TODO
+    depends_on: [BL-010-001]
+
+  - id: BL-010-003
+    title: "Implémenter les entités"
+    version_target: v0.1.0
+    priority: P0
+    status: TODO
+    depends_on: [BL-010-001, BL-010-002]
+
+  - id: BL-010-004
+    title: "Implémenter enums et policies"
+    version_target: v0.1.0
+    priority: P0
+    status: TODO
+    depends_on: [BL-010-001]
+
+  - id: BL-010-005
+    title: "Implémenter les exceptions"
+    version_target: v0.1.0
+    priority: P0
+    status: TODO
+    depends_on: [BL-010-001]
+
+  - id: BL-010-006
+    title: "Définir les ports"
+    version_target: v0.1.0
+    priority: P1
+    status: TODO
+    depends_on: [BL-010-001, BL-010-002, BL-010-003]
+
+  - id: BL-010-007
+    title: "Implémenter les fakes in-memory"
+    version_target: v0.1.0
+    priority: P1
+    status: TODO
+    depends_on: [BL-010-006]
+
+  - id: BL-010-008
+    title: "Ajouter tests et documentation"
+    version_target: v0.1.0
+    priority: P1
+    status: TODO
+    depends_on: [BL-010-001, BL-010-002, BL-010-003, BL-010-004, BL-010-005, BL-010-006, BL-010-007]

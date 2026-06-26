@@ -97,8 +97,40 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
   provenance (supply chain), upload SARIF tolérant (repo privé sans GHAS).
 - `docs/workflow/SETUP.md` : checklist de configuration GitHub one-time (commandes `gh`).
 
-## [0.1.0] - 2026-06-18
+## [0.1.0] - 2026-06-26
 
 ### Ajouté
-- Squelette du projet : `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/`.
-- Exemples `Greeter` (classe concrète) et `Repository` (classe abstraite) + tests miroir.
+
+- **Exceptions** hiérarchisées en 6 familles (`base`, `validation`, `user`, `auth`,
+  `session`, `role`, `authorization`) ; tout réexporté depuis `baobab_auth_core.exceptions`.
+- **Value objects** (frozen dataclasses) : `Email`, `AuthSubject`, `PlainPassword`,
+  `PasswordHash`, `RoleName`, `PermissionName`, `UserId`, `RoleId`, `PermissionId`,
+  `SessionId`, `TokenId`, `AuditEventId`. Masquage automatique des secrets dans
+  `__str__`/`__repr__`, normalisation (minuscules/majuscules), validation format.
+- **Entités** (dataclasses avec comportement métier) : `User` (méthodes `activate`,
+  `disable`, `lock`, `unlock`, `assign_role`, `remove_role`, `mark_login_failure`, …),
+  `Role`, `Permission`, `Session`, `AuditEvent` (immuable), `UserProfile`.
+- **Enums** (`StrEnum`) : `UserStatus` (PENDING/ACTIVE/LOCKED/DISABLED/DELETED),
+  `SessionStatus` (ACTIVE/REVOKED/EXPIRED), `AuditSeverity` (INFO/WARNING/CRITICAL),
+  `AuditEventType` (12 types d'événements).
+- **Politiques métier** (frozen dataclasses injectables) : `PasswordPolicy` (longueur,
+  complexité, interdiction e-mail), `SessionPolicy` (TTL tokens, verrouillage),
+  `RolePolicy` (rôle par défaut, protection dernier super-admin).
+- **Ports** (`typing.Protocol`, `@runtime_checkable`) : `Clock`, `IdGenerator`,
+  `PasswordHasher`, `TokenProvider`, `UserRepository`, `RoleRepository`,
+  `PermissionRepository`, `SessionRepository`, `AuditRepository`, `UnitOfWork`.
+- **Fakes** testables : `FakeClock` (avance dans le temps), `FakeIdGenerator`
+  (séquence prévisible), `FakePasswordHasher` (`hashed:<val>`), `FakeTokenProvider`
+  (markers `EXPIRED`/`INVALID`), repositories en mémoire pour les 5 ports,
+  `InMemoryUnitOfWork` (suivi committed/rolled_back).
+- **Tests** : 234 tests unitaires, couverture 98.89 %, arborescence miroir complète.
+- Documentation guides : `docs/guides/domain_model.rst`, `docs/guides/ports.rst`,
+  `docs/guides/testing.rst`.
+
+### Notes techniques
+
+- Librairie **pure** : zéro dépendance de production (pas de FastAPI, SQLAlchemy,
+  JWT, Argon2, bcrypt, httpx, Docker).
+- Python ≥ 3.13 requis (`StrEnum`, `datetime.UTC`, `dataclasses.FrozenInstanceError`).
+- Architecture hexagonale : `domain/` (value objects, entités, politiques, enums),
+  `ports/` (protocoles), `testing/` (fakes + repositories en mémoire).

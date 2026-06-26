@@ -3,14 +3,14 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "example-package"
+name = "baobab-auth-core"
 version = "0.1.0"
-description = "Template de projet Python piloté par plusieurs IA de développement."
+description = "Socle métier d'authentification et d'autorisation — librairie pure sans dépendances techniques."
 readme = "README.md"
 requires-python = ">=3.13"
 license = "MIT"
 authors = [{ name = "Patrick ANDRIANAIVO" }]
-keywords = ["template", "python", "ai", "agents"]
+keywords = ["auth", "authentication", "authorization", "domain", "core"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.13",
@@ -18,18 +18,16 @@ classifiers = [
     "Operating System :: OS Independent",
     "Typing :: Typed",
 ]
-dependencies = [
-    "pydantic-settings>=2.0",
-]
+dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/your-org/your-repo"
-Repository = "https://github.com/your-org/your-repo"
-Documentation = "https://your-repo.readthedocs.io"
-Issues = "https://github.com/your-org/your-repo/issues"
+Homepage = "https://github.com/baobabgit/baobab-auth-core"
+Repository = "https://github.com/baobabgit/baobab-auth-core"
+Documentation = "https://baobab-auth-core.readthedocs.io"
+Issues = "https://github.com/baobabgit/baobab-auth-core/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/example_package"]
+packages = ["src/baobab_auth_core"]
 
 [dependency-groups]
 dev = [
@@ -43,7 +41,6 @@ dev = [
     "build>=1.0",
     "twine>=6.0",
     "pre-commit>=4.0",
-    "pydantic-settings>=2.0",
 ]
 docs = [
     "sphinx>=8.0",
@@ -82,7 +79,7 @@ ignore = [
 convention = "pep257"
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**/*.py" = ["D", "ANN", "N802"]
+"tests/**/*.py" = ["D", "ANN", "N802", "N803"]
 
 # --- Mypy : typage strict ----------------------------------------------------
 [tool.mypy]
@@ -111,6 +108,7 @@ exclude_lines = [
     "raise NotImplementedError",
     "if TYPE_CHECKING:",
     "@(abc\\.)?abstractmethod",
+    "\\.\\.\\.\\s*$",
 ]
 
 # --- Bandit : analyse de sécurité statique (SAST) ----------------------------
