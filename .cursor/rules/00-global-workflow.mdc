@@ -1,0 +1,45 @@
+---
+description: Workflow IA multi-outils, verrou, handoff, recovery, runs
+globs:
+  - "docs/ai_workflow/**"
+  - "docs/backlog/**"
+alwaysApply: false
+---
+
+# Workflow global
+
+Source unique : [`AGENTS.md`](../../AGENTS.md) — section « Workflow ».
+
+## Principe fondamental
+
+Un seul outil actif à la fois. Avant toute modification, lire
+`docs/ai_workflow/state/lock.yaml` :
+
+- `locked: false` → tu peux démarrer, créer le verrou.
+- `locked: true` + `expires_at` futur → **STOP**, un autre outil est actif.
+- `locked: true` + `expires_at` dépassé → verrou orphelin → procédure de recovery.
+
+## Rôles disponibles
+
+Orchestrateur · Analyste fonctionnel · Architecte Python · Découpeur backlog ·
+Développeur Python · Ingénieur QA · Reviewer technique · Release manager.
+
+Un outil endosse **un seul rôle** par session.
+
+## Structure d'un run (`docs/ai_workflow/runs/BL-XXX/`)
+
+```
+00_assignment.md  01_context.md  02_role_prompt.md  03_expected_outputs.md
+04_worklog.md     05_tests_report.md  06_review.md  07_handoff.md
+08_recovery.md    status.yaml
+```
+
+Mettre à jour `status.yaml` à chaque transition d'état.
+
+## Recovery
+
+En cas de verrou orphelin :
+1. Lire `status.yaml` + `git status` + `git diff`.
+2. Exécuter `make all`.
+3. Produire `08_recovery.md`.
+4. Recréer le verrou.
