@@ -23,7 +23,7 @@ jobs:
     outputs:
       required: ${{ steps.check.outputs.required }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Lire integration_required
         id: check
         run: |
@@ -45,7 +45,7 @@ jobs:
     needs: check-required
     if: needs.check-required.outputs.required == 'true'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v3
       - run: uv python install 3.13
       - run: uv sync --frozen
