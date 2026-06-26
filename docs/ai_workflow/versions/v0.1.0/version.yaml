@@ -1,24 +1,38 @@
 version: "0.1.0"
-status: IN_DEVELOPMENT
+status: INTERNAL_VALIDATED
 started_at: "2026-06-26"
+validated_at: "2026-06-26"
 target_release_date: null
 integration_required: false
 
 backlogs:
-  - BL-010-001
-  - BL-010-002
-  - BL-010-003
-  - BL-010-004
-  - BL-010-005
-  - BL-010-006
-  - BL-010-007
-  - BL-010-008
+  - id: BL-010-001
+    status: COMPLETED
+  - id: BL-010-002
+    status: COMPLETED
+  - id: BL-010-003
+    status: COMPLETED
+  - id: BL-010-004
+    status: COMPLETED
+  - id: BL-010-005
+    status: COMPLETED
+  - id: BL-010-006
+    status: COMPLETED
+  - id: BL-010-007
+    status: COMPLETED
+  - id: BL-010-008
+    status: COMPLETED
 
 quality_gates:
-  black: pending
-  ruff: pending
-  mypy: pending
-  bandit: pending
-  coverage: pending
-  build: pending
-  twine: pending
+  black: passed
+  ruff: passed
+  mypy: passed
+  bandit: passed
+  coverage: "98.89%"
+  build: passed
+  twine: passed
+
+notes: >
+  234 tests unitaires, couverture 98.89%.
+  Librairie pure sans dépendance de production.
+  CI désactivée (workflow_dispatch) — à réactiver avant merge sur version/v0.1.0.
