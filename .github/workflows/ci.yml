@@ -1,15 +1,20 @@
 name: CI
 
+# Pour suspendre la CI sans toucher au code (quota de minutes épuisé) :
+#   GitHub → Settings → Variables → Actions → CI_ENABLED = false
+# Pour réactiver :
+#   Remettre CI_ENABLED = true (ou supprimer la variable), puis déclencher
+#   manuellement via l'onglet Actions → "Run workflow".
+#
+# Comportement par défaut (variable absente) : CI s'exécute normalement.
+
 on:
-  push:
-    branches: [main, "version/**", "claude/**"]
   pull_request:
+    paths-ignore:
+      - "docs/**"
+      - "*.md"
+      - ".gitignore"
   workflow_dispatch:
-    inputs:
-      reason:
-        description: "Raison du déclenchement manuel"
-        required: false
-        default: "Test manuel"
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -19,40 +24,24 @@ permissions:
   contents: read
 
 jobs:
-  quality:
-    name: Qualité (black + ruff)
+  checks:
+    name: Qualité + Typage + Sécurité
     runs-on: ubuntu-latest
+    if: vars.CI_ENABLED != 'false'
+    permissions:
+      contents: read
+      security-events: write
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v7
+      - uses: astral-sh/setup-uv@v8.0.0
       - run: uv python install 3.13
       - run: uv sync --frozen
       - name: Black (format check)
         run: uv run black --check src tests
       - name: Ruff (lint)
         run: uv run ruff check src tests
-
-  typing:
-    name: Typage (mypy strict)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v7
-      - run: uv python install 3.13
-      - run: uv sync --frozen
-      - run: uv run mypy src
-
-  security:
-    name: Sécurité (bandit)
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
-    steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v7
-      - run: uv python install 3.13
-      - run: uv sync --frozen
+      - name: Mypy (typage strict)
+        run: uv run mypy src
       - name: Bandit (SARIF)
         run: uv run bandit -c pyproject.toml -r src -f sarif -o bandit.sarif
         continue-on-error: true
@@ -68,16 +57,17 @@ jobs:
   tests:
     name: Tests + couverture ≥ 95 %
     runs-on: ubuntu-latest
+    if: vars.CI_ENABLED != 'false'
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v7
+      - uses: astral-sh/setup-uv@v8.0.0
       - run: uv python install 3.13
       - run: uv sync --frozen
       - name: pytest
         run: uv run pytest --cov=src --cov-report=term-missing --cov-report=xml --cov-fail-under=95 --junitxml=junit.xml
       - name: Upload rapports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: reports
           path: |
@@ -88,7 +78,7 @@ jobs:
   commit-policy:
     name: Politique de commit (anti-attribution IA)
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
+    if: vars.CI_ENABLED != 'false' && github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v7
         with:
@@ -102,17 +92,18 @@ jobs:
   build:
     name: Build package
     runs-on: ubuntu-latest
-    needs: [quality, typing, security, tests]
+    needs: [checks, tests]
+    if: vars.CI_ENABLED != 'false'
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v7
+      - uses: astral-sh/setup-uv@v8.0.0
       - run: uv python install 3.13
       - run: uv sync --frozen
       - name: Build (sdist + wheel)
         run: uv build
       - name: Twine check
         run: uv run twine check dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: dist-ci
           path: dist/

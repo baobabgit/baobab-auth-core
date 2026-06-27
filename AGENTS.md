@@ -194,6 +194,29 @@ Un hook `pre-commit` de type `commit-msg` (`no-ai-attribution`) **rejette automa
 tout commit dont le message contient une formulation interdite.
 Ce contrôle est également rejoué en CI (job `commit-policy` dans `ci.yml`).
 
+## Démarrage de session (ritual obligatoire)
+
+**À faire en tout premier, avant toute modification de fichier :**
+
+1. **Lire `docs/ai_workflow/state/lock.yaml`**
+   - `locked: true` + `expires_at` futur → stop. Un autre outil est actif.
+   - `locked: true` + `expires_at` dépassé → verrou orphelin → suivre la procédure de recovery.
+   - `locked: false` → continuer.
+
+2. **Lire `docs/ai_workflow/state/queue.yaml`** — identifier le backlog actif (`status: IN_PROGRESS`)
+   ou le prochain à démarrer (`status: READY`).
+
+3. **Lire `docs/ai_workflow/runs/BL-XXX/status.yaml`** du run en cours
+   — connaître l'étape atteinte et le rôle en cours.
+
+4. **Lire `docs/ai_workflow/runs/BL-XXX/07_handoff.md`** — note de passation
+   laissée par la session précédente.
+
+5. **Annoncer** : état du verrou, backlog concerné, dernière étape accomplie, prochaine action.
+   Puis poser le verrou (`locked: true`, `expires_at: +2h`) et démarrer.
+
+Ce ritual s'applique que la session reprenne un travail interrompu ou démarre un nouveau backlog.
+
 ## Gestion du verrou de travail
 
 Un seul outil peut travailler à un instant donné. Le verrou est géré via :
@@ -229,9 +252,29 @@ Les contrats publics sont dans `docs/contracts/`. La matrice de compatibilité e
 `docs/integrations/compatibility_matrix.yaml`. Les rapports d'intégration sont dans
 `docs/integrations/reports/`.
 
+### Mécanisme d'intégration : git-ref directe
+
+La validation inter-librairies se fait via **référence git directe** sur la branche
+`version/vX.Y.Z` — aucune publication sur TestPyPI n'est requise.
+
+**Côté producteur** (cette librairie) :
+1. Atteindre `INTERNAL_VALIDATED` (`bl/` tous mergés, CI verte sur `version/`).
+2. Déclarer les consommateurs à valider dans `compatibility_matrix.yaml` (`status: PENDING`).
+3. Communiquer la branche aux consommateurs : `version/vX.Y.Z`.
+
+**Côté consommateur** (librairie qui dépend de ce package) :
+1. Remplacer la dépendance stable par la git-ref dans `pyproject.toml` :
+   ```
+   "baobab-auth-core @ git+https://github.com/baobabgit/baobab-auth-core.git@version/vX.Y.Z"
+   ```
+2. Exécuter `uv sync` puis `make all` (ou `uv run pytest tests/integration/`).
+3. Reporter le résultat (`PASSED` / `FAILED`) dans la `compatibility_matrix.yaml`
+   du producteur et produire un rapport dans `docs/integrations/reports/`.
+4. Revenir à la dépendance PyPI une fois la release publiée.
+
 Une version est `INTEGRATION_VALIDATED` si : validation interne réussie, dépendances
-compatibles, librairies consommatrices requises ont validé l'intégration, rapports
-d'intégration présents, matrices de compatibilité à jour.
+compatibles, librairies consommatrices requises ont validé l'intégration (`status: PASSED`),
+rapports d'intégration présents, matrices de compatibilité à jour.
 
 ## Workflow
 
