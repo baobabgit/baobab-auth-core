@@ -14,7 +14,7 @@ décorés ``@runtime_checkable``. Le code métier ne connaît que ces interfaces
 jamais les implémentations concrètes.
 
 Ports livrés
------------
+------------
 
 ``UserRepository``, ``RoleRepository``, ``PermissionRepository``,
 ``SessionRepository``, ``AuditRepository``, ``PasswordHasher``, ``TokenProvider``,

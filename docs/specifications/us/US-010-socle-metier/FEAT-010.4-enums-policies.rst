@@ -13,7 +13,7 @@ Fournir les énumérations de statut/événement (``StrEnum``) et les policies
 métier injectables (frozen dataclasses) configurant le comportement du domaine.
 
 Énumérations livrées
--------------------
+--------------------
 
 * ``UserStatus`` : ``PENDING``, ``ACTIVE``, ``LOCKED``, ``DISABLED``, ``DELETED``.
 * ``SessionStatus`` : ``ACTIVE``, ``REVOKED``, ``EXPIRED``.
@@ -21,7 +21,7 @@ métier injectables (frozen dataclasses) configurant le comportement du domaine.
 * ``AuditEventType`` : 12 types (``USER_REGISTERED`` … ``ACCOUNT_DELETED``).
 
 Policies livrées
----------------
+----------------
 
 * ``PasswordPolicy`` (``min_length=12``, ``max_length=256``, ``require_letter``,
   ``require_digit_or_symbol``, ``forbid_email_as_password``).

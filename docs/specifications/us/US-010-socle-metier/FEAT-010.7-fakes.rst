@@ -14,7 +14,7 @@ test pour chaque port, afin d'écrire des tests déterministes sans dépendance
 externe. Ces fakes font partie du livrable (et non des tests internes).
 
 Fakes livrés
------------
+------------
 
 * ``FakeClock`` — horloge contrôlable (``set_now``, ``advance``).
 * ``FakeIdGenerator`` — identifiants prévisibles ``"<préfixe>-<n>"``.
