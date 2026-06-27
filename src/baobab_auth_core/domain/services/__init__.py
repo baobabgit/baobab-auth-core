@@ -1,0 +1,6 @@
+"""Services du domaine de baobab-auth-core (réservé aux versions suivantes).
+
+:spec: BL-010-001
+"""
+
+__all__: list[str] = []

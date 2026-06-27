@@ -12,9 +12,9 @@ locked: false
 active_run: null
 active_role: null
 active_tool: null
-branch: null
+branch: claude/baobab-auth-core-v0-1-0-csxzz5
 locked_at: null
-last_heartbeat_at: null
+last_heartbeat_at: "2026-06-26T14:33:00Z"
 expires_at: null
-lease_duration_minutes: 15
-status: IDLE
+lease_duration_minutes: 240
+status: COMPLETED

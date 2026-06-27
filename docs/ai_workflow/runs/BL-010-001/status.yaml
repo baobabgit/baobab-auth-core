@@ -1,0 +1,8 @@
+run_id: BL-010-001
+backlog_id: BL-010-001
+title: "Initialiser le package baobab-auth-core"
+status: COMPLETED
+role: Développeur Python
+branch: claude/baobab-auth-core-v0-1-0-csxzz5
+started_at: "2026-06-26T00:00:00Z"
+completed_at: "2026-06-26T14:35:00Z"
