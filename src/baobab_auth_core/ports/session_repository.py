@@ -1,0 +1,45 @@
+"""Port SessionRepository — persistance des sessions.
+
+:spec: BL-010-006
+"""
+
+from typing import Protocol, runtime_checkable
+
+from baobab_auth_core.domain.entities.session import Session
+from baobab_auth_core.domain.value_objects.session_id import SessionId
+from baobab_auth_core.domain.value_objects.user_id import UserId
+
+
+@runtime_checkable
+class SessionRepository(Protocol):
+    """Protocole de persistance des entités :class:`Session`."""
+
+    def get_by_id(self, session_id: SessionId) -> Session | None:
+        """Récupère une session par son identifiant.
+
+        :param session_id: Identifiant de la session.
+        :returns: La session ou ``None`` si elle n'existe pas.
+        """
+        ...
+
+    def get_active_by_user(self, user_id: UserId) -> list[Session]:
+        """Liste les sessions actives d'un utilisateur.
+
+        :param user_id: Identifiant de l'utilisateur.
+        :returns: Liste des sessions actives.
+        """
+        ...
+
+    def save(self, session: Session) -> None:
+        """Sauvegarde une session (création ou mise à jour).
+
+        :param session: Session à sauvegarder.
+        """
+        ...
+
+    def delete(self, session_id: SessionId) -> None:
+        """Supprime une session par son identifiant.
+
+        :param session_id: Identifiant de la session à supprimer.
+        """
+        ...
