@@ -31,7 +31,7 @@ packages = ["src/baobab_auth_core"]
 
 [dependency-groups]
 dev = [
-    "black>=24.0",
+    "black>=26.5.1",
     "ruff>=0.9",
     "mypy>=1.13",
     "bandit[toml]>=1.8",
