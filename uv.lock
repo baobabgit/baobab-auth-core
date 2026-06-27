@@ -137,12 +137,12 @@ docs = [
 [package.metadata.requires-dev]
 dev = [
     { name = "bandit", extras = ["toml"], specifier = ">=1.8" },
-    { name = "black", specifier = ">=24.0" },
+    { name = "black", specifier = ">=26.5.1" },
     { name = "build", specifier = ">=1.0" },
     { name = "mypy", specifier = ">=1.13" },
-    { name = "nox", specifier = ">=2024.0" },
+    { name = "nox", specifier = ">=2026.4.10" },
     { name = "pre-commit", specifier = ">=4.0" },
-    { name = "pytest", specifier = ">=8.0" },
+    { name = "pytest", specifier = ">=9.1.1" },
     { name = "pytest-cov", specifier = ">=5.0" },
     { name = "ruff", specifier = ">=0.9" },
     { name = "twine", specifier = ">=6.0" },
