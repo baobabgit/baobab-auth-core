@@ -128,7 +128,7 @@ queue:
     title: "Implémenter AuthorizationService"
     version_target: v0.3.0
     priority: P0
-    status: TODO
+    status: IN_REVIEW
     depends_on: [BL-030-001, BL-030-003]
   - id: BL-030-003
     title: "Finaliser ports, policies et fakes RBAC"
