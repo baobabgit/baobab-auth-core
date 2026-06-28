@@ -14,7 +14,7 @@ backlogs:
   - id: BL-030-001
     status: DONE
   - id: BL-030-002
-    status: TODO
+    status: DONE
   - id: BL-030-003
     status: DONE
   - id: BL-030-004
