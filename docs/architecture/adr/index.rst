@@ -46,6 +46,12 @@ Index des décisions d'architecture de ``baobab-auth-core``.
    * - :doc:`0012 <0012-change-password-revoke-all-sessions>`
      - Création de ``ChangePassword`` et ``RevokeAllSessions``
      - Accepté
+   * - :doc:`0013 <0013-error-codes-metier>`
+     - Codes d'erreur métier sur les exceptions publiques
+     - Accepté
+   * - :doc:`0014 <0014-stabilisation-contrats-publics>`
+     - Stabilisation des contrats publics, cas d'usage lecture/admin
+     - Accepté
 
 .. toctree::
    :maxdepth: 1
@@ -63,3 +69,5 @@ Index des décisions d'architecture de ``baobab-auth-core``.
    0010-default-auth-catalog
    0011-role-policy-super-admin
    0012-change-password-revoke-all-sessions
+   0013-error-codes-metier
+   0014-stabilisation-contrats-publics
