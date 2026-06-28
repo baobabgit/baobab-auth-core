@@ -1,0 +1,8 @@
+id: BL-030-007
+title: "Compléter audit et tests RBAC"
+status: DONE
+step: merge
+role: Reviewer technique
+started_at: "2026-06-28"
+completed_at: "2026-06-28"
+last_heartbeat_at: "2026-06-28T13:43:00Z"

@@ -97,6 +97,34 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
   provenance (supply chain), upload SARIF tolérant (repo privé sans GHAS).
 - `docs/workflow/SETUP.md` : checklist de configuration GitHub one-time (commandes `gh`).
 
+## [0.3.0] - 2026-06-28
+
+### Ajouté
+
+- **Autorisation RBAC** (couche `application/`) :
+  `AuthContext`, `AuthorizationService`, cas d'usage `AssignRole` et `RemoveRole`.
+- **Commandes** : `AssignRoleCommand`, `RemoveRoleCommand`.
+- **Politique** : `PermissionPolicy` ; extension de `RolePolicy` pour les rôles
+  système et la protection du dernier `SUPER_ADMIN`.
+- **Ports** : `PermissionRepository`, `RoleRepository` finalisés ; fakes
+  `InMemoryPermissionRepository`, `InMemoryRoleRepository`.
+- **Audit RBAC** : `ROLE_ASSIGNED`, `ROLE_REMOVED` (sans fuite de secret).
+- **Exceptions RBAC** stabilisées : `RoleError`, `LastSuperAdminRoleRemovalError`,
+  alias rétrocompatible `LastAdminRoleRemovalError`.
+- **Guide** : `docs/guides/rbac.rst`.
+- **Tests** : 339 tests unitaires, couverture 99 % (dont `test_rbac_audit.py`).
+
+### Modifié — évolution de contrat (MINOR)
+
+- Export public de `AuthContext`, `AuthorizationService`, `PermissionPolicy`.
+- `Logout` et `RevokeSession` peuvent s'appuyer sur `AuthorizationService` pour
+  les contrôles d'autorisation fins (ADR-0008).
+
+### Notes
+
+- Le core reste une librairie **pure** : aucune dépendance de production ajoutée.
+- `integration_required: false` pour cette version (pas de consommateur bloquant).
+
 ## [0.2.0] - 2026-06-28
 
 ### Ajouté

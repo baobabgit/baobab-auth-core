@@ -1,9 +1,9 @@
 version: "0.2.0"
-status: INTERNAL_VALIDATED
+status: RELEASED
 created_at: "2026-06-28"
 started_at: "2026-06-28"
 validated_at: "2026-06-28"
-released_at: null
+released_at: "2026-06-28"
 target_release_date: "2026-06-28"
 integration_required: false
 # Statuts : PLANNED → IN_DEVELOPMENT → INTERNAL_VALIDATED
@@ -44,3 +44,4 @@ notes: >
   (RegisterUser, AuthenticateUser, RefreshSession, Logout, RevokeSession),
   lockout minimal, DTO tokens/session, audit auth/session.
   Évolution de contrat : extension du port TokenProvider (refresh tokens + révocation).
+  Version mergée sur main, taguée v0.2.0 et package déployé sur PyPI le 2026-06-28.

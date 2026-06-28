@@ -46,7 +46,14 @@ class InMemoryPermissionRepository:
 
         :returns: Liste des permissions.
         """
-        return list(self._store.values())
+        return list(self.list_permissions())
+
+    def list_permissions(self) -> tuple[Permission, ...]:
+        """Liste toutes les permissions.
+
+        :returns: Tuple des permissions.
+        """
+        return tuple(self._store.values())
 
     def clear(self) -> None:
         """Vide le dépôt."""
