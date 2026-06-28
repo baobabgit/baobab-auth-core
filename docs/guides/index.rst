@@ -45,6 +45,15 @@ Organisés selon la taxonomie **Diátaxis** :
 
 .. toctree::
    :maxdepth: 2
+   :caption: Contrats publics (v0.5.0)
+
+   public_api
+   error_codes
+   contracts
+   versioning
+
+.. toctree::
+   :maxdepth: 2
    :caption: Référence
 
    domain_model

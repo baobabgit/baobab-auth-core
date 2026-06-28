@@ -8,7 +8,7 @@
 #   6. effort raisonnable
 #   7. absence de blocage d'intégration
 
-version_active: v0.4.0
+version_active: v0.5.0
 
 queue:
   # ---- v0.1.0 (RELEASED) ----
@@ -249,6 +249,80 @@ queue:
   - id: BL-040-014
     title: "Durcir RevokeAllSessions"
     version_target: v0.4.0
+    priority: P1
+    status: DONE
+    depends_on: []
+
+  # ---- v0.5.0 (IN_DEVELOPMENT) — stabilisation des contrats publics ----
+  - id: BL-050-001
+    title: "Stabiliser les exports publics"
+    version_target: v0.5.0
+    priority: P0
+    status: DONE
+    depends_on: []
+  - id: BL-050-002
+    title: "Stabiliser les DTO applicatifs"
+    version_target: v0.5.0
+    priority: P0
+    status: DONE
+    depends_on: []
+  - id: BL-050-003
+    title: "Ajouter les codes d'erreurs métier"
+    version_target: v0.5.0
+    priority: P0
+    status: DONE
+    depends_on: []
+  - id: BL-050-004
+    title: "Harmoniser les ports repositories"
+    version_target: v0.5.0
+    priority: P1
+    status: DONE
+    depends_on: []
+  - id: BL-050-005
+    title: "Stabiliser PasswordHasher"
+    version_target: v0.5.0
+    priority: P1
+    status: DONE
+    depends_on: []
+  - id: BL-050-006
+    title: "Stabiliser TokenProvider"
+    version_target: v0.5.0
+    priority: P1
+    status: DONE
+    depends_on: [BL-050-002]
+  - id: BL-050-007
+    title: "Ajouter les cas d'usage de lecture"
+    version_target: v0.5.0
+    priority: P1
+    status: DONE
+    depends_on: [BL-050-001, BL-050-002]
+  - id: BL-050-008
+    title: "Ajouter les cas d'usage admin métier"
+    version_target: v0.5.0
+    priority: P1
+    status: DONE
+    depends_on: [BL-050-001]
+  - id: BL-050-009
+    title: "Ajouter les tests contractuels inter-briques"
+    version_target: v0.5.0
+    priority: P1
+    status: DONE
+    depends_on: [BL-050-001, BL-050-002, BL-050-003]
+  - id: BL-050-010
+    title: "Documenter les contrats d'intégration"
+    version_target: v0.5.0
+    priority: P1
+    status: DONE
+    depends_on: [BL-050-009]
+  - id: BL-050-011
+    title: "Mettre à jour README et CHANGELOG"
+    version_target: v0.5.0
+    priority: P2
+    status: DONE
+    depends_on: [BL-050-010]
+  - id: BL-050-012
+    title: "Renforcer les tests de pureté du core"
+    version_target: v0.5.0
     priority: P1
     status: DONE
     depends_on: []

@@ -97,6 +97,32 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
   provenance (supply chain), upload SARIF tolérant (repo privé sans GHAS).
 - `docs/workflow/SETUP.md` : checklist de configuration GitHub one-time (commandes `gh`).
 
+## [0.5.0] - 2026-06-28
+
+### Ajouté
+
+- **API publique stabilisée** : ``baobab_auth_core.__all__`` exporte explicitement
+  entités, value objects, enums, policies, ``DefaultAuthCatalog``, ports, DTO et
+  cas d'usage (+ test d'import) — ADR-0014.
+- **Codes d'erreur métier** : chaque exception publique expose ``error_code``,
+  ``safe_message`` et ``http_status`` recommandé, sans dépendance web (ADR-0013).
+- **DTO** : ``AuthenticatedUser`` gagne ``permissions`` (et un accès ``roles``) ;
+  nouveau ``TokenIssueContext`` pour la brique ``security``.
+- **Cas d'usage de lecture** : ``GetUserBySubject``, ``GetCurrentUser``,
+  ``ListRoles``, ``ListPermissions``, ``ListUserSessions``.
+- **Cas d'usage admin** : ``DisableUser``, ``EnableUser``, ``BootstrapSuperAdmin``
+  (amorçage du premier super-admin) ; audit ``ACCOUNT_ENABLED`` ajouté.
+- **Politique** ``LockoutPolicy`` exposée comme type de contrat dédié.
+- **Tests contractuels** ``tests/contracts/{database,security,api,client,admin}/``
+  n'important que ``baobab_auth_core`` ; test de pureté renforcé.
+- Guides : ``public_api``, ``error_codes``, ``contracts``, ``versioning``.
+
+### Notes
+
+- Lecture non auditée (aucun événement d'audit de lecture) ; les mutations admin
+  restent auditées.
+- 429 tests, couverture 98.71 %. Core toujours **pur** (aucune infrastructure).
+
 ## [0.4.1] - 2026-06-28
 
 ### Corrigé

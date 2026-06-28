@@ -20,3 +20,4 @@ structuré et traçable sous [`../us/`](../us/) : User Stories (`US-XXX`) → Fe
 | v0.2.0  | [`baobab-auth-core-v0.2.0.md`](baobab-auth-core-v0.2.0.md) | [`../us/US-020-authentification-sessions/`](../us/US-020-authentification-sessions/) |
 | v0.3.0  | [`baobab-auth-core-v0.3.0.md`](baobab-auth-core-v0.3.0.md) | [`../us/US-030-rbac-autorisation/`](../us/US-030-rbac-autorisation/) |
 | v0.4.0  | [`baobab-auth-core-v0.4.0.md`](baobab-auth-core-v0.4.0.md) | [`../us/US-040-durcissement-rbac/`](../us/US-040-durcissement-rbac/) |
+| v0.5.0  | [`baobab-auth-core-v0.5.0.md`](baobab-auth-core-v0.5.0.md) | [`../us/US-050-stabilisation-contrats/`](../us/US-050-stabilisation-contrats/) |

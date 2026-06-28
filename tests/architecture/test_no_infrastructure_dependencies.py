@@ -51,3 +51,18 @@ class TestNoInfrastructureDependencies:
                 if pattern.search(content):
                     violations.append(f"{path.name}: {pattern.pattern}")
         assert not violations, f"Dépendances interdites détectées : {violations}"
+
+    def test_BL_050_012_1_contrats_sans_import_de_brique_voisine(self) -> None:
+        contracts_dir = _SRC.parent.parent / "tests" / "contracts"
+        sibling = re.compile(
+            r"^\s*(?:from|import)\s+(?:database|security|api|client|admin)\b",
+            re.MULTILINE,
+        )
+        files = [p for p in contracts_dir.rglob("test_*.py") if p.name != "__init__.py"]
+        assert files, "Aucun test de contrat trouvé."
+        for path in files:
+            content = path.read_text(encoding="utf-8")
+            assert "baobab_auth_core" in content, path.name
+            assert not sibling.search(
+                content
+            ), f"{path.name} importe une brique voisine."

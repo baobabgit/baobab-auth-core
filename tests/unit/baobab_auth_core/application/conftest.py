@@ -4,6 +4,9 @@ from datetime import UTC, datetime
 
 import pytest
 
+from baobab_auth_core.application.services.authorization_service import (
+    AuthorizationService,
+)
 from baobab_auth_core.domain.entities.user import User
 from baobab_auth_core.domain.enums.user_status import UserStatus
 from baobab_auth_core.domain.value_objects.auth_subject import AuthSubject
@@ -15,6 +18,10 @@ from baobab_auth_core.testing.fake_id_generator import FakeIdGenerator
 from baobab_auth_core.testing.fake_password_hasher import FakePasswordHasher
 from baobab_auth_core.testing.fake_token_provider import FakeTokenProvider
 from baobab_auth_core.testing.in_memory_audit_repository import InMemoryAuditRepository
+from baobab_auth_core.testing.in_memory_permission_repository import (
+    InMemoryPermissionRepository,
+)
+from baobab_auth_core.testing.in_memory_role_repository import InMemoryRoleRepository
 from baobab_auth_core.testing.in_memory_session_repository import (
     InMemorySessionRepository,
 )
@@ -63,6 +70,46 @@ def tokens() -> FakeTokenProvider:
 @pytest.fixture
 def uow() -> InMemoryUnitOfWork:
     return InMemoryUnitOfWork()
+
+
+@pytest.fixture
+def roles() -> InMemoryRoleRepository:
+    return InMemoryRoleRepository()
+
+
+@pytest.fixture
+def permissions() -> InMemoryPermissionRepository:
+    return InMemoryPermissionRepository()
+
+
+@pytest.fixture
+def authorization(  # type: ignore[no-untyped-def]
+    users, roles, permissions
+) -> AuthorizationService:
+    return AuthorizationService(users, roles, permissions)
+
+
+@pytest.fixture
+def make_role():  # type: ignore[no-untyped-def]
+    """Factory de Role système (sans permissions par défaut)."""
+    from baobab_auth_core.domain.entities.role import Role
+    from baobab_auth_core.domain.value_objects.permission_name import PermissionName
+    from baobab_auth_core.domain.value_objects.role_id import RoleId
+    from baobab_auth_core.domain.value_objects.role_name import RoleName
+
+    now = datetime(2024, 1, 1, tzinfo=UTC)
+
+    def _factory(name: str, permission_names: tuple[str, ...] = ()) -> Role:
+        return Role(
+            id=RoleId(f"role-{name.lower()}"),
+            name=RoleName(name),
+            is_system=True,
+            created_at=now,
+            updated_at=now,
+            permission_names=tuple(PermissionName(p) for p in permission_names),
+        )
+
+    return _factory
 
 
 @pytest.fixture

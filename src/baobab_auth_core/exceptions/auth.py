@@ -1,6 +1,6 @@
 """Exceptions liées à l'authentification et aux tokens.
 
-:spec: BL-010-005
+:spec: BL-010-005, BL-050-003
 """
 
 from baobab_auth_core.exceptions.base import BaobabAuthCoreError
@@ -10,20 +10,24 @@ class InvalidCredentialsError(BaobabAuthCoreError):
     """Identifiants invalides (email ou mot de passe incorrect).
 
     Le message ne doit pas indiquer lequel des deux est incorrect.
-
-    :param message: Message générique sans secret.
     """
+
+    error_code = "auth.credentials.invalid"
+    http_status = 401
+    safe_message = "Identifiants invalides."
 
 
 class TokenInvalidError(BaobabAuthCoreError):
-    """Token invalide (signature incorrecte, format invalide, etc.).
+    """Token invalide (signature incorrecte, format invalide, etc.)."""
 
-    :param message: Description de l'erreur.
-    """
+    error_code = "auth.token.invalid"  # nosec B105
+    http_status = 401
+    safe_message = "Token invalide."
 
 
 class TokenExpiredError(BaobabAuthCoreError):
-    """Token expiré.
+    """Token expiré."""
 
-    :param message: Description de l'erreur.
-    """
+    error_code = "auth.token.expired"  # nosec B105
+    http_status = 401
+    safe_message = "Token expiré."
