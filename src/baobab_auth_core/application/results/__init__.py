@@ -1,6 +1,8 @@
-"""Résultats de la couche application (réservé aux versions suivantes).
+"""Résultats de la couche application.
 
 :spec: BL-010-001
 """
 
-__all__: list[str] = []
+from baobab_auth_core.application.results.auth_context import AuthContext
+
+__all__ = ["AuthContext"]

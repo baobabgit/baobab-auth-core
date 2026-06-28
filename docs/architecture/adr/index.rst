@@ -34,6 +34,9 @@ Index des décisions d'architecture de ``baobab-auth-core``.
    * - :doc:`0008 <0008-authcontext-minimal-en-0-2-0>`
      - ``AuthContext`` minimal en v0.2.0, complet en v0.3.0
      - Accepté
+   * - :doc:`0009 <0009-rbac-authcontext-authorization-service>`
+     - RBAC applicatif pur et ``AuthContext`` immutable
+     - Accepté
 
 .. toctree::
    :maxdepth: 1
@@ -47,3 +50,4 @@ Index des décisions d'architecture de ``baobab-auth-core``.
    0006-tracabilite-specs-vs-backlog
    0007-extension-token-provider-refresh
    0008-authcontext-minimal-en-0-2-0
+   0009-rbac-authcontext-authorization-service
