@@ -23,6 +23,15 @@ Organisés selon la taxonomie **Diátaxis** :
 
 .. toctree::
    :maxdepth: 2
+   :caption: Authentification & sessions (v0.2.0)
+
+   authentication
+   sessions
+   audit
+   security_rules
+
+.. toctree::
+   :maxdepth: 2
    :caption: Référence
 
    domain_model

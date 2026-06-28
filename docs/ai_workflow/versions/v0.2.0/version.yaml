@@ -1,8 +1,8 @@
 version: "0.2.0"
-status: IN_DEVELOPMENT
+status: INTERNAL_VALIDATED
 created_at: "2026-06-28"
 started_at: "2026-06-28"
-validated_at: null
+validated_at: "2026-06-28"
 released_at: null
 target_release_date: "2026-06-28"
 integration_required: false
@@ -12,32 +12,32 @@ integration_required: false
 
 backlogs:
   - id: BL-020-001
-    status: TODO
+    status: DONE
   - id: BL-020-002
-    status: TODO
+    status: DONE
   - id: BL-020-003
-    status: TODO
+    status: DONE
   - id: BL-020-004
-    status: TODO
+    status: DONE
   - id: BL-020-005
-    status: TODO
+    status: DONE
   - id: BL-020-006
-    status: TODO
+    status: DONE
   - id: BL-020-007
-    status: TODO
+    status: DONE
   - id: BL-020-008
-    status: TODO
+    status: DONE
   - id: BL-020-009
-    status: TODO
+    status: DONE
 
 quality_gates:
-  black: pending
-  ruff: pending
-  mypy: pending
-  bandit: pending
-  coverage: pending
-  build: pending
-  twine: pending
+  black: passed
+  ruff: passed
+  mypy: passed
+  bandit: passed
+  coverage: "99.18%"
+  build: passed
+  twine: passed
 
 notes: >
   Version 0.2.0 — parcours d'authentification et de gestion de session

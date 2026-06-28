@@ -7,6 +7,7 @@ from typing import Protocol, runtime_checkable
 
 from baobab_auth_core.domain.entities.session import Session
 from baobab_auth_core.domain.value_objects.session_id import SessionId
+from baobab_auth_core.domain.value_objects.token_id import TokenId
 from baobab_auth_core.domain.value_objects.user_id import UserId
 
 
@@ -19,6 +20,18 @@ class SessionRepository(Protocol):
 
         :param session_id: Identifiant de la session.
         :returns: La session ou ``None`` si elle n'existe pas.
+        """
+        ...
+
+    def get_by_refresh_token_id(self, refresh_token_id: TokenId) -> Session | None:
+        """Récupère une session par l'identifiant de son refresh token.
+
+        Utilisé par ``RefreshSession`` pour retrouver la session à partir du
+        ``refresh_token_id`` extrait du token, sans manipuler le token brut.
+
+        :param refresh_token_id: Identifiant du refresh token de la session.
+        :returns: La session ou ``None`` si elle n'existe pas.
+        :spec: ADR-0007
         """
         ...
 
