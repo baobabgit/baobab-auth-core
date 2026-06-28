@@ -1,8 +1,8 @@
 id: BL-030-004
 title: "Stabiliser AssignRole"
-status: TODO
-step: null
-role: null
-started_at: null
-completed_at: null
-last_heartbeat_at: null
+status: DONE
+step: merge
+role: Reviewer technique
+started_at: "2026-06-28"
+completed_at: "2026-06-28"
+last_heartbeat_at: "2026-06-28T11:21:36Z"
