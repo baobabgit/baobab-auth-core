@@ -8,61 +8,111 @@
 #   6. effort raisonnable
 #   7. absence de blocage d'intégration
 
-version_active: v0.1.0
+version_active: v0.2.0
 
 queue:
+  # ---- v0.1.0 (RELEASED) ----
   - id: BL-010-001
     title: "Initialiser le package baobab-auth-core"
     version_target: v0.1.0
     priority: P0
     status: COMPLETED
     depends_on: []
-
   - id: BL-010-002
     title: "Implémenter les value objects"
     version_target: v0.1.0
     priority: P0
     status: COMPLETED
     depends_on: [BL-010-001]
-
   - id: BL-010-003
     title: "Implémenter les entités"
     version_target: v0.1.0
     priority: P0
     status: COMPLETED
     depends_on: [BL-010-001, BL-010-002]
-
   - id: BL-010-004
     title: "Implémenter enums et policies"
     version_target: v0.1.0
     priority: P0
     status: COMPLETED
     depends_on: [BL-010-001]
-
   - id: BL-010-005
     title: "Implémenter les exceptions"
     version_target: v0.1.0
     priority: P0
     status: COMPLETED
     depends_on: [BL-010-001]
-
   - id: BL-010-006
     title: "Définir les ports"
     version_target: v0.1.0
     priority: P1
     status: COMPLETED
     depends_on: [BL-010-001, BL-010-002, BL-010-003]
-
   - id: BL-010-007
     title: "Implémenter les fakes in-memory"
     version_target: v0.1.0
     priority: P1
     status: COMPLETED
     depends_on: [BL-010-006]
-
   - id: BL-010-008
     title: "Ajouter tests et documentation"
     version_target: v0.1.0
     priority: P1
     status: COMPLETED
     depends_on: [BL-010-001, BL-010-002, BL-010-003, BL-010-004, BL-010-005, BL-010-006, BL-010-007]
+
+  # ---- v0.2.0 (IN_DEVELOPMENT) ----
+  - id: BL-020-001
+    title: "Implémenter RegisterUser"
+    version_target: v0.2.0
+    priority: P0
+    status: DONE
+    depends_on: []
+  - id: BL-020-002
+    title: "Implémenter AuthenticateUser"
+    version_target: v0.2.0
+    priority: P0
+    status: DONE
+    depends_on: [BL-020-001]
+  - id: BL-020-003
+    title: "Implémenter lockout minimal"
+    version_target: v0.2.0
+    priority: P0
+    status: DONE
+    depends_on: [BL-020-002]
+  - id: BL-020-004
+    title: "Implémenter RefreshSession"
+    version_target: v0.2.0
+    priority: P1
+    status: DONE
+    depends_on: [BL-020-002]
+  - id: BL-020-005
+    title: "Implémenter Logout"
+    version_target: v0.2.0
+    priority: P1
+    status: DONE
+    depends_on: [BL-020-002]
+  - id: BL-020-006
+    title: "Implémenter RevokeSession"
+    version_target: v0.2.0
+    priority: P1
+    status: DONE
+    depends_on: [BL-020-002]
+  - id: BL-020-007
+    title: "Stabiliser DTO tokens/session"
+    version_target: v0.2.0
+    priority: P1
+    status: DONE
+    depends_on: [BL-020-001, BL-020-002]
+  - id: BL-020-008
+    title: "Ajouter audit auth/session"
+    version_target: v0.2.0
+    priority: P1
+    status: DONE
+    depends_on: [BL-020-002]
+  - id: BL-020-009
+    title: "Ajouter tests et documentation"
+    version_target: v0.2.0
+    priority: P1
+    status: DONE
+    depends_on: [BL-020-001, BL-020-002, BL-020-003, BL-020-004, BL-020-005, BL-020-006, BL-020-007, BL-020-008]

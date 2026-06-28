@@ -8,13 +8,13 @@
 #
 # Tout outil actif doit mettre à jour last_heartbeat_at et expires_at régulièrement.
 
-locked: false
-active_run: null
-active_role: null
-active_tool: null
-branch: template-sync/2026-06-28
-locked_at: null
-last_heartbeat_at: "2026-06-28T08:05:00Z"
-expires_at: null
-lease_duration_minutes: 120
-status: COMPLETED
+locked: true
+active_run: BL-020
+active_role: Développeur Python
+active_tool: claude-code
+branch: version/v0.2.0
+locked_at: "2026-06-28T08:30:00Z"
+last_heartbeat_at: "2026-06-28T08:30:00Z"
+expires_at: "2026-06-28T12:30:00Z"
+lease_duration_minutes: 240
+status: IN_PROGRESS

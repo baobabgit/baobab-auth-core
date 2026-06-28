@@ -17,3 +17,5 @@ structuré et traçable sous [`../us/`](../us/) : User Stories (`US-XXX`) → Fe
 | Version | Fichier source | Spec dérivée |
 |---------|----------------|--------------|
 | v0.1.0  | [`baobab-auth-core-v0.1.0.md`](baobab-auth-core-v0.1.0.md) | [`../us/US-010-socle-metier/`](../us/US-010-socle-metier/) |
+| v0.2.0  | [`baobab-auth-core-v0.2.0.md`](baobab-auth-core-v0.2.0.md) | [`../us/US-020-authentification-sessions/`](../us/US-020-authentification-sessions/) |
+| v0.3.0  | [`baobab-auth-core-v0.3.0.md`](baobab-auth-core-v0.3.0.md) | [`../us/US-030-rbac-autorisation/`](../us/US-030-rbac-autorisation/) |
