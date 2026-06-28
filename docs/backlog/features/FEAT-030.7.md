@@ -5,7 +5,7 @@
 | Rattachée à | [US-030](../user_stories/US-030.md) |
 | Backlog | [BL-030-007](../backlogs/BL-030-007.md) |
 | Priorité | P1 |
-| Statut | TODO |
+| Statut | DONE |
 | Spec dérivée | [`FEAT-030.7`](../../specifications/us/US-030-rbac-authorization/FEAT-030.7-rbac-audit-tests.rst) |
 
 ## Livrables
