@@ -8,7 +8,7 @@
 #   6. effort raisonnable
 #   7. absence de blocage d'intégration
 
-version_active: v0.3.0
+version_active: null
 
 queue:
   # ---- v0.1.0 (RELEASED) ----
@@ -117,7 +117,7 @@ queue:
     status: DONE
     depends_on: [BL-020-001, BL-020-002, BL-020-003, BL-020-004, BL-020-005, BL-020-006, BL-020-007, BL-020-008]
 
-  # ---- v0.3.0 (IN_DEVELOPMENT) ----
+  # ---- v0.3.0 (RELEASED) ----
   - id: BL-030-001
     title: "Stabiliser AuthContext"
     version_target: v0.3.0

@@ -1,14 +1,16 @@
 # Rapport de release — v0.3.0
 
-Date : (à remplir)
+Date : 2026-06-28
 Tag : v0.3.0
 
 ## Artefacts
 
-- [ ] sdist
-- [ ] wheel
-- [ ] Release GitHub
+- sdist : publié sur PyPI
+- wheel : publié sur PyPI
+- Release GitHub : https://github.com/baobabgit/baobab-auth-core/releases/tag/v0.3.0
 
 ## Notes
 
-<!-- Résumé des changements, breaking changes, migration. -->
+Version `0.3.0` mergée sur `main` via PR #25, tag `v0.3.0` poussé,
+workflow `release.yml` vert (PyPI Trusted Publishing + GitHub Release).
+339 tests, couverture 99,48 %.
