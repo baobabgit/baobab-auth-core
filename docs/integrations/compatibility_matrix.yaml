@@ -17,6 +17,9 @@ version: v0.5.0
 # Ordre de validation imposé par les dépendances de contrat (cahier v0.5.0
 # §7→§11) : database -> security -> api -> client -> admin.
 #
+# Les 5 consommateurs sont OBLIGATOIRES (required: true) : la v0.5.0 n'atteint
+# INTEGRATION_VALIDATED que lorsque les 5 ont reporté status: PASSED.
+#
 # NB : les noms de paquets ci-dessous suivent la convention baobab-auth-* et
 # restent à confirmer côté consommateurs.
 
@@ -26,6 +29,7 @@ validated_consumers:
     contract: database
     version: PENDING
     status: PENDING
+    required: true
     integration_method: git_ref
     ref: version/v0.5.0
     validation_type:
@@ -41,6 +45,7 @@ validated_consumers:
     contract: security
     version: PENDING
     status: PENDING
+    required: true
     integration_method: git_ref
     ref: version/v0.5.0
     validation_type:
@@ -57,6 +62,7 @@ validated_consumers:
     contract: api
     version: PENDING
     status: PENDING
+    required: true
     integration_method: git_ref
     ref: version/v0.5.0
     validation_type:
@@ -73,6 +79,7 @@ validated_consumers:
     contract: client
     version: PENDING
     status: PENDING
+    required: true
     integration_method: git_ref
     ref: version/v0.5.0
     validation_type:
@@ -88,6 +95,7 @@ validated_consumers:
     contract: admin
     version: PENDING
     status: PENDING
+    required: true
     integration_method: git_ref
     ref: version/v0.5.0
     validation_type:
