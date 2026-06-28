@@ -1,13 +1,12 @@
 # Verrou de travail global — mode stable séquentiel
-# Un seul outil peut travailler à un instant donné.
 
-locked: true
-active_run: BL-030-007
-active_role: Développeur Python
-active_tool: cursor
-branch: bl/030-007-complete-rbac-audit-tests
-locked_at: "2026-06-28T13:42:00Z"
-last_heartbeat_at: "2026-06-28T13:42:00Z"
-expires_at: "2026-06-28T15:42:00Z"
+locked: false
+active_run: null
+active_role: null
+active_tool: null
+branch: null
+locked_at: null
+last_heartbeat_at: "2026-06-28T13:50:00Z"
+expires_at: null
 lease_duration_minutes: 120
-status: IN_PROGRESS
+status: IDLE

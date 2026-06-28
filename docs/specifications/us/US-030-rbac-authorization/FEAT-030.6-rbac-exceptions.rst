@@ -3,7 +3,7 @@ FEAT-030.6 — Stabiliser exceptions RBAC
 
 :Rattachée à: :ref:`us-030`
 :Backlog: ``BL-030-006``
-:Statut: TODO
+:Statut: DONE
 
 Description
 -----------

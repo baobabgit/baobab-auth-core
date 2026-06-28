@@ -3,7 +3,7 @@ FEAT-030.7 — Compléter audit et tests RBAC
 
 :Rattachée à: :ref:`us-030`
 :Backlog: ``BL-030-007``
-:Statut: TODO
+:Statut: DONE
 
 Description
 -----------

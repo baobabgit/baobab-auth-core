@@ -32,6 +32,12 @@ Organisés selon la taxonomie **Diátaxis** :
 
 .. toctree::
    :maxdepth: 2
+   :caption: Autorisation RBAC (v0.3.0)
+
+   rbac
+
+.. toctree::
+   :maxdepth: 2
    :caption: Référence
 
    domain_model

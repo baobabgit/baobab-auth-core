@@ -133,6 +133,32 @@ await repo.save(user)
 found = await repo.get_by_email(email)
 ```
 
+### Autorisation RBAC (v0.3.0)
+
+```python
+from baobab_auth_core.application.results import AuthContext
+from baobab_auth_core.application.services import AuthorizationService
+from baobab_auth_core.application.commands.assign_role_command import AssignRoleCommand
+from baobab_auth_core.application.use_cases.assign_role import AssignRole
+from baobab_auth_core.exceptions import ForbiddenError, PermissionDeniedError
+
+authorization = AuthorizationService(users, roles, permissions)
+context: AuthContext = authorization.build_context("subject-alice")
+
+authorization.require_permission(context, "auth:user:read")
+
+assign = AssignRole(users, roles, authorization, audit, ids, clock, uow)
+assign.execute(
+    AssignRoleCommand(
+        actor_subject="subject-admin",
+        target_user_id="user-target",
+        role_name="support",
+    )
+)
+```
+
+Voir le guide détaillé : [`docs/guides/rbac.rst`](docs/guides/rbac.rst).
+
 ## Qualité
 
 Toutes les vérifications s'exécutent via `make all` (ou `uv run nox -s all`) :
