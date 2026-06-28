@@ -70,4 +70,4 @@ class TestPublicApi:
         assert required <= set(baobab_auth_core.__all__)
 
     def test_BL_050_001_4_version_exposee(self) -> None:
-        assert baobab_auth_core.__version__ == "0.5.0"
+        assert baobab_auth_core.__version__ == "0.5.1"

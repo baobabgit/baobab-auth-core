@@ -1,6 +1,6 @@
 """baobab-auth-core — socle métier d'authentification et d'autorisation.
 
-Version : 0.5.0
+Version : 0.5.1
 
 Ce package expose une **API publique stable** (entités, value objects, enums,
 policies, catalogue, ports, DTO et cas d'usage) destinée aux briques
@@ -78,7 +78,7 @@ from baobab_auth_core.ports.token_provider import TokenProvider
 from baobab_auth_core.ports.unit_of_work import UnitOfWork
 from baobab_auth_core.ports.user_repository import UserRepository
 
-__version__ = "0.5.0"
+__version__ = "0.5.1"
 
 __all__ = [
     # Use cases

@@ -1,0 +1,27 @@
+version: "0.5.1"
+status: RELEASE_READY
+created_at: "2026-06-28"
+started_at: "2026-06-28"
+validated_at: "2026-06-28"
+released_at: null
+target_release_date: "2026-06-28"
+integration_required: false
+
+# Republication packaging de v0.5.0 (même code). La version 0.5.0 ne peut pas
+# être publiée sur PyPI : son nom de fichier y a été utilisé puis supprimé, et
+# PyPI en interdit définitivement la réutilisation (file-name-reuse). 0.5.1
+# republie le même contenu sous un numéro disponible.
+
+backlogs: []
+
+quality_gates:
+  black: passed
+  ruff: passed
+  mypy: passed
+  bandit: passed
+  coverage: "98.71%"
+  build: passed
+  twine: passed
+
+notes: >
+  Patch de republication PyPI (cf. v0.5.0). Code identique à v0.5.0.
