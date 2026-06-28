@@ -1,12 +1,12 @@
 # Verrou de travail global — mode stable séquentiel
 
-locked: false
-active_run: null
-active_role: null
-active_tool: null
-branch: null
-locked_at: null
-last_heartbeat_at: "2026-06-28T13:50:00Z"
-expires_at: null
+locked: true
+active_run: v0.3.0-release
+active_role: Release manager
+active_tool: cursor
+branch: version/v0.3.0
+locked_at: "2026-06-28T14:00:00Z"
+last_heartbeat_at: "2026-06-28T14:00:00Z"
+expires_at: "2026-06-28T16:00:00Z"
 lease_duration_minutes: 120
-status: IDLE
+status: IN_PROGRESS
