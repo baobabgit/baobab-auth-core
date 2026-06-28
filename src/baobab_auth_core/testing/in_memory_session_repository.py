@@ -6,6 +6,7 @@
 from baobab_auth_core.domain.entities.session import Session
 from baobab_auth_core.domain.enums.session_status import SessionStatus
 from baobab_auth_core.domain.value_objects.session_id import SessionId
+from baobab_auth_core.domain.value_objects.token_id import TokenId
 from baobab_auth_core.domain.value_objects.user_id import UserId
 
 
@@ -23,6 +24,17 @@ class InMemorySessionRepository:
         :returns: La session ou ``None``.
         """
         return self._store.get(session_id.value)
+
+    def get_by_refresh_token_id(self, refresh_token_id: TokenId) -> Session | None:
+        """Récupère une session par l'identifiant de son refresh token.
+
+        :param refresh_token_id: Identifiant du refresh token.
+        :returns: La session ou ``None``.
+        """
+        for session in self._store.values():
+            if session.refresh_token_id == refresh_token_id:
+                return session
+        return None
 
     def get_active_by_user(self, user_id: UserId) -> list[Session]:
         """Liste les sessions actives d'un utilisateur.

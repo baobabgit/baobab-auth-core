@@ -40,3 +40,64 @@ class Session:
     user_agent: str | None = field(default=None)
     ip_address: str | None = field(default=None)
     device_label: str | None = field(default=None)
+
+    def is_expired(self, now: datetime) -> bool:
+        """Indique si la session est expirée à l'instant donné.
+
+        :param now: Horodatage courant (UTC).
+        :returns: ``True`` si ``now`` est postérieur ou égal à ``expires_at``
+            ou si le statut est déjà ``EXPIRED``.
+        :spec: BL-020-004
+        """
+        return self.status == SessionStatus.EXPIRED or now >= self.expires_at
+
+    def is_active(self, now: datetime) -> bool:
+        """Indique si la session est active et utilisable.
+
+        :param now: Horodatage courant (UTC).
+        :returns: ``True`` si le statut est ``ACTIVE``, non révoquée et non expirée.
+        :spec: BL-020-004
+        """
+        return (
+            self.status == SessionStatus.ACTIVE
+            and self.revoked_at is None
+            and not self.is_expired(now)
+        )
+
+    def mark_used(self, now: datetime) -> None:
+        """Met à jour l'horodatage de dernière utilisation.
+
+        :param now: Horodatage courant (UTC).
+        :spec: BL-020-004
+        """
+        self.last_used_at = now
+
+    def rotate_refresh_token(self, refresh_token_id: TokenId, now: datetime) -> None:
+        """Remplace l'identifiant du refresh token (rotation) et marque l'usage.
+
+        :param refresh_token_id: Nouveau ``refresh_token_id``.
+        :param now: Horodatage courant (UTC).
+        :spec: BL-020-004
+        """
+        self.refresh_token_id = refresh_token_id
+        self.last_used_at = now
+
+    def revoke(self, now: datetime) -> None:
+        """Révoque la session (idempotent).
+
+        :param now: Horodatage courant (UTC).
+        :spec: BL-020-006
+        """
+        if self.status == SessionStatus.REVOKED:
+            return
+        self.status = SessionStatus.REVOKED
+        self.revoked_at = now
+
+    def expire(self, now: datetime) -> None:
+        """Marque la session comme expirée.
+
+        :param now: Horodatage courant (UTC).
+        :spec: BL-020-004
+        """
+        self.status = SessionStatus.EXPIRED
+        self.last_used_at = now

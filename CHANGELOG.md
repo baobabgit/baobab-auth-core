@@ -97,6 +97,49 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
   provenance (supply chain), upload SARIF tolérant (repo privé sans GHAS).
 - `docs/workflow/SETUP.md` : checklist de configuration GitHub one-time (commandes `gh`).
 
+## [0.2.0] - 2026-06-28
+
+### Ajouté
+
+- **Cas d'usage d'authentification** (couche `application/use_cases/`) :
+  `RegisterUser`, `AuthenticateUser`, `RefreshSession`, `Logout`, `RevokeSession`.
+- **Lockout minimal** : verrouillage du compte après `max_failed_login_attempts`
+  échecs, auto-déverrouillage après `lockout_duration_seconds`, audit
+  `ACCOUNT_LOCKED`.
+- **Commandes** (`application/commands/`) : `RegisterUserCommand`,
+  `AuthenticateUserCommand`, `RefreshSessionCommand`, `LogoutCommand`,
+  `RevokeSessionCommand`.
+- **DTO** (`application/results/`) : `AuthenticatedUser`, `TokenPair` (repr
+  masquant les tokens), `TokenClaims`, `SessionDTO` (sans refresh token brut),
+  et les résultats `RegisterUserResult`, `AuthenticateUserResult`,
+  `RefreshSessionResult`.
+- **Services applicatifs** : `TokenIssuer` (émission de paire access/refresh) et
+  `AuditRecorder` (audit centralisé) ; **`AuditMetadataGuard`** (domaine) qui
+  rejette toute métadonnée d'audit sensible (anti-fuite de secret).
+- **Entité `Session`** : comportement métier `is_active`, `is_expired`,
+  `mark_used`, `rotate_refresh_token`, `revoke` (idempotent), `expire`.
+- **Audit auth/session** : `USER_REGISTERED`, `LOGIN_SUCCESS`, `LOGIN_FAILURE`,
+  `ACCOUNT_LOCKED`, `SESSION_REFRESHED`, `LOGOUT`, `SESSION_REVOKED`.
+- **Guides** : `docs/guides/authentication.rst`, `sessions.rst`, `audit.rst`,
+  `security_rules.rst`.
+- **Tests** : 290 tests unitaires, couverture 99 % (dont un test de sécurité
+  vérifiant l'absence de fuite de secret dans l'audit).
+
+### Modifié — évolution de contrat (MINOR)
+
+- **Port `TokenProvider`** étendu (ADR-0007) : ajout de `create_refresh_token`,
+  `verify_refresh_token` et `revoke_token` (refresh tokens et révocation). Le
+  `FakeTokenProvider` est étendu en conséquence. Le refresh token brut n'est
+  jamais stocké ni audité (seul son `refresh_token_id` est persisté).
+- **Port `SessionRepository`** : ajout de `get_by_refresh_token_id` pour
+  retrouver une session lors du rafraîchissement.
+
+### Notes
+
+- `AuthContext` complet et contrôles d'autorisation fins reportés à v0.3.0
+  (ADR-0008) ; `RevokeSession` accepte un acteur minimal en v0.2.0.
+- Le core reste une librairie **pure** : aucune dépendance de production ajoutée.
+
 ## [0.1.0] - 2026-06-26
 
 ### Ajouté

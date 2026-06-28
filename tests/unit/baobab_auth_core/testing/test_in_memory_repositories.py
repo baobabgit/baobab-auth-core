@@ -229,6 +229,15 @@ class TestInMemorySessionRepository:
     def test_BL_010_007_28_get_by_id_not_found(self) -> None:
         assert self.repo.get_by_id(SessionId("nope")) is None
 
+    def test_BL_020_004_1_get_by_refresh_token_id(self) -> None:
+        self.repo.save(self._make_session())
+        found = self.repo.get_by_refresh_token_id(TokenId("tok-1"))
+        assert found is not None
+        assert found.id == SessionId("s1")
+
+    def test_BL_020_004_2_get_by_refresh_token_id_not_found(self) -> None:
+        assert self.repo.get_by_refresh_token_id(TokenId("nope")) is None
+
 
 class TestInMemoryAuditRepository:
     def setup_method(self) -> None:

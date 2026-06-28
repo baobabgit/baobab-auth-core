@@ -44,3 +44,46 @@ class TestSession:
         assert s.user_agent == "Mozilla/5.0"
         assert s.ip_address == "127.0.0.1"
         assert s.device_label == "My Phone"
+
+    def _make(self, status: SessionStatus = SessionStatus.ACTIVE) -> Session:
+        return Session(
+            id=SessionId("s1"),
+            user_id=UserId("u1"),
+            refresh_token_id=TokenId("t1"),
+            status=status,
+            created_at=_NOW,
+            expires_at=_EXPIRES,
+        )
+
+    def test_BL_020_004_1_is_active_et_is_expired(self) -> None:
+        s = self._make()
+        assert s.is_active(_NOW) is True
+        assert s.is_expired(_NOW) is False
+        assert s.is_expired(_EXPIRES) is True
+        assert s.is_active(_EXPIRES) is False
+
+    def test_BL_020_004_2_mark_used(self) -> None:
+        s = self._make()
+        s.mark_used(_NOW)
+        assert s.last_used_at == _NOW
+
+    def test_BL_020_004_3_rotate_refresh_token(self) -> None:
+        s = self._make()
+        s.rotate_refresh_token(TokenId("t2"), _NOW)
+        assert s.refresh_token_id == TokenId("t2")
+        assert s.last_used_at == _NOW
+
+    def test_BL_020_006_1_revoke_idempotent(self) -> None:
+        s = self._make()
+        s.revoke(_NOW)
+        assert s.status == SessionStatus.REVOKED
+        assert s.revoked_at == _NOW
+        s.revoke(_EXPIRES)  # idempotent : ne change pas la date de révocation
+        assert s.revoked_at == _NOW
+        assert s.is_active(_NOW) is False
+
+    def test_BL_020_004_4_expire(self) -> None:
+        s = self._make()
+        s.expire(_NOW)
+        assert s.status == SessionStatus.EXPIRED
+        assert s.is_expired(_NOW) is True
