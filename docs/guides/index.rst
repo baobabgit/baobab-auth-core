@@ -17,3 +17,5 @@ Organisés selon la taxonomie **Diátaxis** :
    :caption: How-to
 
    how-to/ajouter-une-classe
+   how-to/integration-validation
+   how-to/template-sync

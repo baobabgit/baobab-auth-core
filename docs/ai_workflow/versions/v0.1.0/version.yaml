@@ -1,8 +1,9 @@
 version: "0.1.0"
-status: INTERNAL_VALIDATED
+status: RELEASED
 started_at: "2026-06-26"
 validated_at: "2026-06-26"
-target_release_date: null
+released_at: "2026-06-28"
+target_release_date: "2026-06-28"
 integration_required: false
 
 backlogs:
@@ -35,4 +36,5 @@ quality_gates:
 notes: >
   234 tests unitaires, couverture 98.89%.
   Librairie pure sans dépendance de production.
-  CI désactivée (workflow_dispatch) — à réactiver avant merge sur version/v0.1.0.
+  Version mergée sur main, taguée v0.1.0, release GitHub publiée
+  et package déployé sur PyPI le 2026-06-28.

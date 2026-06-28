@@ -69,10 +69,9 @@ gh api --method POST repos/OWNER/REPO/rulesets --input - <<'JSON'
       "parameters": {
         "strict_required_status_checks_policy": true,
         "required_status_checks": [
-          {"context": "Qualité (black + ruff)"},
-          {"context": "Typage (mypy strict)"},
-          {"context": "Sécurité (bandit)"},
+          {"context": "Qualité + Typage + Sécurité"},
           {"context": "Tests + couverture ≥ 95 %"},
+          {"context": "Traçabilité (specs → backlog → runs)"},
           {"context": "Build package"}
         ]
       }
@@ -103,7 +102,39 @@ publisher* :
 
 Aucun token à stocker : la publication se fait par OIDC.
 
-## 7. Sécurité (Code Scanning)
+## 7. Quota CI — suspension et réactivation
+
+Sur un dépôt privé, les minutes GitHub Actions sont limitées. En cas de quota épuisé,
+la CI peut être suspendue sans toucher au code, via une **variable de dépôt**.
+
+### Suspendre la CI
+
+```
+GitHub → Settings → Secrets and variables → Actions → Variables → New repository variable
+  Name  : CI_ENABLED
+  Value : false
+```
+
+Effet immédiat : tous les jobs de `ci.yml` sont sautés (`skipped`). Les PRs restent
+ouvrables et les commits continuent de s'empiler ; aucun job ne consomme de minutes.
+
+### Réactiver la CI
+
+Deux options (au choix) :
+- Remettre `CI_ENABLED = true` (ou supprimer la variable) ;
+- Puis lancer un run manuel : **Actions → CI → Run workflow**.
+
+### Règle de merge pendant la suspension
+
+Si le ruleset exige la CI verte, le merge est bloqué tant que les jobs sont en `skipped`.
+Options :
+- Désactiver temporairement le ruleset via `gh api` ou l'UI ;
+- Ou attendre la réinitialisation du quota, réactiver la CI et obtenir un run vert.
+
+> La variable `CI_ENABLED` n'est **pas** versionnée : elle vit uniquement dans
+> les paramètres du dépôt GitHub, sans laisser de trace dans le code.
+
+## 8. Sécurité (Code Scanning)
 
 - **Repo public** : l'upload SARIF (Bandit) alimente l'onglet *Security* sans config.
 - **Repo privé** : nécessite **GitHub Advanced Security**. Sans GHAS, l'étape d'upload

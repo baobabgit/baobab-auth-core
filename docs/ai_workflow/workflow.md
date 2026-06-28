@@ -20,14 +20,42 @@
 13. Revue technique
 14. Corrections éventuelles
 15. Merge vers version/vX.Y.Z
-16. Validation interne de version
-17. Validation d'intégration si nécessaire
-18. Release candidate
-19. Merge version/vX.Y.Z → main
-20. Tag vX.Y.Z sur main
-21. Release GitHub automatique
-22. Publication PyPI automatique
+16. Validation interne de version (INTERNAL_VALIDATED)
+17. Validation d'intégration via git-ref (INTEGRATION_PENDING → INTEGRATION_VALIDATED)
+18. Merge version/vX.Y.Z → main
+19. Tag vX.Y.Z sur main
+20. Release GitHub automatique
+21. Publication PyPI automatique
 ```
+
+### Détail de l'étape 17 — Validation d'intégration (git-ref directe)
+
+La validation inter-librairies ne passe pas par TestPyPI. Le mécanisme retenu est la
+**référence git directe** sur la branche `version/vX.Y.Z`.
+
+**Producteur** :
+1. Passer `version.yaml` à `INTEGRATION_PENDING`.
+2. Mettre à jour `compatibility_matrix.yaml` : ajouter les consommateurs avec `status: PENDING`,
+   `integration_method: git_ref`, `ref: version/vX.Y.Z`.
+3. Notifier chaque consommateur.
+
+**Consommateur** (dans son propre dépôt) :
+1. Remplacer la dépendance dans `pyproject.toml` :
+   ```toml
+   [dependency-groups]
+   dev = [
+     "example-package @ git+https://github.com/OWNER/REPO.git@version/vX.Y.Z",
+   ]
+   ```
+2. `uv sync` puis `make all` (ou `uv run pytest tests/integration/ tests/contracts/`).
+3. Reporter le résultat dans la `compatibility_matrix.yaml` du producteur :
+   - `status: PASSED` ou `status: FAILED`
+   - Ajouter le rapport dans `docs/integrations/reports/<producteur>-<version>__<consommateur>.md`
+4. Une fois la release PyPI publiée : revenir à `"example-package>=X.Y.Z"` dans `pyproject.toml`.
+
+**Producteur** (après retour de tous les consommateurs requis) :
+1. Vérifier que tous les consommateurs déclarés ont `status: PASSED`.
+2. Passer `version.yaml` à `INTEGRATION_VALIDATED`.
 
 ## Modèle de branches
 

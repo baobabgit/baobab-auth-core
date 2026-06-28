@@ -292,3 +292,8 @@ du projet (specifications, API, guides) en **reStructuredText**.
 3. Tests présents en miroir (`tests/unit/`), couverture ≥ 95 %.
 4. Docstrings RST + guide mis à jour si le comportement public change.
 5. Commit conforme (BL-XXX: + sans attribution IA), PR fusionnée sur `version/vX.Y.Z`.
+6. Cahier des charges (`docs/specifications/`) déposé, User Stories et FEATs dérivées.
+7. Fiche backlog `docs/backlog/backlogs/BL-XXX.md` renseignée avec la FEAT référencée.
+8. Dossier run `docs/ai_workflow/runs/BL-XXX/` matérialisé, `status.yaml` à jour.
+9. Toute décision d'architecture structurante couverte par un ADR (`docs/architecture/adr/`).
+10. `make traceability` passe sans erreur.
