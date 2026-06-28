@@ -1,8 +1,8 @@
 id: BL-030-001
 title: "Stabiliser AuthContext"
-status: QA_PASSED
-step: qa_review
-role: Ingénieur QA
+status: DONE
+step: merge
+role: Reviewer technique
 started_at: "2026-06-28"
-completed_at: null
-last_heartbeat_at: "2026-06-28T10:35:29Z"
+completed_at: "2026-06-28"
+last_heartbeat_at: "2026-06-28T10:49:24Z"

@@ -122,7 +122,7 @@ queue:
     title: "Stabiliser AuthContext"
     version_target: v0.3.0
     priority: P0
-    status: IN_PROGRESS
+    status: DONE
     depends_on: []
   - id: BL-030-002
     title: "Implémenter AuthorizationService"

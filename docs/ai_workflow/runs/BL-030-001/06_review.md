@@ -2,11 +2,13 @@
 
 ## Décision
 
-QA_PASSED
+TECH_REVIEW_PASSED
 
 ## Vérifications
 
 - Conformité `AGENTS.md` : une classe publique, un fichier, type hints complets.
+- Correction technique : les helpers de déduplication sont portés par `AuthContext`
+  pour respecter la règle de logique en classes/méthodes.
 - Docstrings RST présentes sur le module, la classe et les méthodes publiques.
 - Tests miroir présents dans `tests/unit/baobab_auth_core/application/results/`.
 - `AuthContext` immutable, sans secret, avec déduplication stable.

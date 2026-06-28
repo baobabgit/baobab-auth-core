@@ -14,38 +14,6 @@ from baobab_auth_core.domain.value_objects.session_id import SessionId
 from baobab_auth_core.domain.value_objects.user_id import UserId
 
 
-def _deduplicate_roles(values: tuple[RoleName, ...]) -> tuple[RoleName, ...]:
-    """Déduplique les rôles en conservant leur ordre.
-
-    :param values: Valeurs à dédupliquer.
-    :returns: Tuple sans doublon.
-    """
-    seen: set[RoleName] = set()
-    deduplicated: list[RoleName] = []
-    for value in values:
-        if value not in seen:
-            seen.add(value)
-            deduplicated.append(value)
-    return tuple(deduplicated)
-
-
-def _deduplicate_permissions(
-    values: tuple[PermissionName, ...],
-) -> tuple[PermissionName, ...]:
-    """Déduplique les permissions en conservant leur ordre.
-
-    :param values: Valeurs à dédupliquer.
-    :returns: Tuple sans doublon.
-    """
-    seen: set[PermissionName] = set()
-    deduplicated: list[PermissionName] = []
-    for value in values:
-        if value not in seen:
-            seen.add(value)
-            deduplicated.append(value)
-    return tuple(deduplicated)
-
-
 @dataclass(frozen=True)
 class AuthContext:
     """Contexte immutable utilisé par les décisions d'autorisation.
@@ -73,11 +41,11 @@ class AuthContext:
 
         :returns: ``None``.
         """
-        object.__setattr__(self, "roles", _deduplicate_roles(self.roles))
+        object.__setattr__(self, "roles", self._deduplicate_roles(self.roles))
         object.__setattr__(
             self,
             "permissions",
-            _deduplicate_permissions(self.permissions),
+            self._deduplicate_permissions(self.permissions),
         )
 
     def has_role(self, role: RoleName | str) -> bool:
@@ -132,6 +100,21 @@ class AuthContext:
         return RoleName(role)
 
     @staticmethod
+    def _deduplicate_roles(values: tuple[RoleName, ...]) -> tuple[RoleName, ...]:
+        """Déduplique les rôles en conservant leur ordre.
+
+        :param values: Valeurs à dédupliquer.
+        :returns: Tuple sans doublon.
+        """
+        seen: set[RoleName] = set()
+        deduplicated: list[RoleName] = []
+        for value in values:
+            if value not in seen:
+                seen.add(value)
+                deduplicated.append(value)
+        return tuple(deduplicated)
+
+    @staticmethod
     def _coerce_permission(permission: PermissionName | str) -> PermissionName:
         """Convertit une permission texte en :class:`PermissionName`.
 
@@ -141,3 +124,20 @@ class AuthContext:
         if isinstance(permission, PermissionName):
             return permission
         return PermissionName(permission)
+
+    @staticmethod
+    def _deduplicate_permissions(
+        values: tuple[PermissionName, ...],
+    ) -> tuple[PermissionName, ...]:
+        """Déduplique les permissions en conservant leur ordre.
+
+        :param values: Valeurs à dédupliquer.
+        :returns: Tuple sans doublon.
+        """
+        seen: set[PermissionName] = set()
+        deduplicated: list[PermissionName] = []
+        for value in values:
+            if value not in seen:
+                seen.add(value)
+                deduplicated.append(value)
+        return tuple(deduplicated)

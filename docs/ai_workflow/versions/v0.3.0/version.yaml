@@ -12,7 +12,7 @@ integration_required: false
 
 backlogs:
   - id: BL-030-001
-    status: IN_PROGRESS
+    status: DONE
   - id: BL-030-002
     status: TODO
   - id: BL-030-003
