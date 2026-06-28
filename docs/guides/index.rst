@@ -5,6 +5,7 @@ Organisés selon la taxonomie **Diátaxis** :
 
 * **Tutoriels** — apprendre pas à pas (orientés découverte).
 * **How-to** — résoudre un problème précis (orientés objectif).
+* **Référence** — description exhaustive du domaine, des ports et des fakes.
 
 .. toctree::
    :maxdepth: 2
@@ -19,3 +20,11 @@ Organisés selon la taxonomie **Diátaxis** :
    how-to/ajouter-une-classe
    how-to/integration-validation
    how-to/template-sync
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Référence
+
+   domain_model
+   ports
+   testing

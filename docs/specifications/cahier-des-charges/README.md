@@ -11,3 +11,9 @@ structuré et traçable sous [`../us/`](../us/) : User Stories (`US-XXX`) → Fe
 
 > Ne modifie pas le contenu déposé ici pour « corriger » la spec : si une clarification
 > est nécessaire, elle se note dans les `us/*.rst` dérivés, pas dans la source.
+
+## Cahiers déposés
+
+| Version | Fichier source | Spec dérivée |
+|---------|----------------|--------------|
+| v0.1.0  | [`baobab-auth-core-v0.1.0.md`](baobab-auth-core-v0.1.0.md) | [`../us/US-010-socle-metier/`](../us/US-010-socle-metier/) |

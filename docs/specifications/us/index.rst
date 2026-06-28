@@ -4,4 +4,4 @@ User Stories
 .. toctree::
    :maxdepth: 2
 
-   US-001-exemple/index
+   US-010-socle-metier/index
