@@ -38,6 +38,13 @@ Organisés selon la taxonomie **Diátaxis** :
 
 .. toctree::
    :maxdepth: 2
+   :caption: Durcissement RBAC (v0.4.0)
+
+   catalog
+   integration_contracts
+
+.. toctree::
+   :maxdepth: 2
    :caption: Référence
 
    domain_model

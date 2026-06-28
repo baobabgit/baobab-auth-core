@@ -97,6 +97,50 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
   provenance (supply chain), upload SARIF tolérant (repo privé sans GHAS).
 - `docs/workflow/SETUP.md` : checklist de configuration GitHub one-time (commandes `gh`).
 
+## [0.4.0] - 2026-06-28
+
+### Ajouté
+
+- **`DefaultAuthCatalog`** (`domain/catalogs/`, exporté depuis `baobab_auth_core`) :
+  catalogue système déterministe de 10 permissions `auth:*`, 4 rôles système
+  (USER, ADMIN, SERVICE, SUPER_ADMIN) et leur mapping rôle → permissions. Aucune
+  I/O ni variable d'environnement (ADR-0010).
+- **Règles strictes `SUPER_ADMIN`** : `AssignRole` refuse l'attribution de
+  `SUPER_ADMIN` par un acteur non `SUPER_ADMIN` ; `RemoveRole` refuse le retrait
+  de `SUPER_ADMIN` par un acteur non `SUPER_ADMIN` puis protège le dernier
+  `SUPER_ADMIN` (`LastSuperAdminRoleRemovalError`).
+- **`RolePolicy`** enrichie : `is_super_admin_role`, `can_assign_role(actor_roles,
+  role)`, `can_remove_role(actor_roles, role)`, `permits_last_super_admin_removal`
+  (ADR-0011).
+- **Audit** : nouveaux événements `JWK_ROTATION_REQUESTED` (CRITICAL) et
+  `ALL_SESSIONS_REVOKED` (WARNING).
+- **`RequestJwkRotation`** : cas d'usage réservé `SUPER_ADMIN` émettant
+  `JWK_ROTATION_REQUESTED`.
+- **`ChangePassword`** (durci) : ancien vérifié, nouveau validé et différent,
+  hachage via port, révocation des autres sessions selon la policy, audit
+  `PASSWORD_CHANGED` sans secret (ADR-0012).
+- **`RevokeAllSessions`** (durci) : un utilisateur révoque ses sessions, un
+  `ADMIN` celles d'un compte standard, protection d'un `SUPER_ADMIN` contre une
+  neutralisation abusive ; audit `ALL_SESSIONS_REVOKED` avec `count` (ADR-0012).
+- **Test d'architecture** `tests/architecture/` : garantit l'absence de
+  dépendance d'infrastructure (FastAPI, SQLAlchemy, JWT, Argon2, bcrypt, httpx,
+  requests, `os.environ`, `open`, socket…) dans `src/`.
+- Guides : `docs/guides/catalog.rst`, `docs/guides/integration_contracts.rst`.
+
+### Modifié — évolution de contrat (pré-1.0)
+
+- `RolePolicy.can_remove_role` change de signature (`actor_roles, role`) ;
+  l'ancienne logique de protection du dernier super-admin est renommée
+  `permits_last_super_admin_removal`.
+- `DefaultAuthCatalog` exporté dans `baobab_auth_core.__all__`.
+
+### Notes
+
+- `ChangePassword`/`RevokeAllSessions` étaient listés en précondition du cahier
+  v0.4.0 mais inexistants : créés ici (ADR-0012).
+- 387 tests unitaires, couverture 99 %. Core toujours **pur** (aucune dépendance
+  de production).
+
 ## [0.3.0] - 2026-06-28
 
 ### Ajouté

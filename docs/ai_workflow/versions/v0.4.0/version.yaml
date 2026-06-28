@@ -1,8 +1,8 @@
 version: "0.4.0"
-status: IN_DEVELOPMENT
+status: INTERNAL_VALIDATED
 created_at: "2026-06-28"
 started_at: "2026-06-28"
-validated_at: null
+validated_at: "2026-06-28"
 released_at: null
 target_release_date: "2026-06-28"
 integration_required: false
@@ -41,13 +41,13 @@ backlogs:
     status: DONE
 
 quality_gates:
-  black: pending
-  ruff: pending
-  mypy: pending
-  bandit: pending
-  coverage: pending
-  build: pending
-  twine: pending
+  black: passed
+  ruff: passed
+  mypy: passed
+  bandit: passed
+  coverage: "99.14%"
+  build: passed
+  twine: passed
 
 notes: >
   Version 0.4.0 — durcissement sécurité et conformité contractuelle RBAC :

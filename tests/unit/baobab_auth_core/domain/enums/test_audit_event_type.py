@@ -12,12 +12,14 @@ class TestAuditEventType:
             "LOGOUT",
             "SESSION_REFRESHED",
             "SESSION_REVOKED",
+            "ALL_SESSIONS_REVOKED",
             "ROLE_ASSIGNED",
             "ROLE_REMOVED",
             "PASSWORD_CHANGED",
             "ACCOUNT_LOCKED",
             "ACCOUNT_DISABLED",
             "ACCOUNT_DELETED",
+            "JWK_ROTATION_REQUESTED",
         }
         actual = {e.value for e in AuditEventType}
         assert actual == expected
@@ -26,5 +28,9 @@ class TestAuditEventType:
         assert AuditEventType.LOGIN_SUCCESS == "LOGIN_SUCCESS"
         assert AuditEventType.LOGIN_FAILURE == "LOGIN_FAILURE"
 
+    def test_BL_040_008_1_jwk_rotation_requested_existe(self) -> None:
+        assert AuditEventType.JWK_ROTATION_REQUESTED == "JWK_ROTATION_REQUESTED"
+        assert AuditEventType.ALL_SESSIONS_REVOKED == "ALL_SESSIONS_REVOKED"
+
     def test_BL_010_004_3_count(self) -> None:
-        assert len(AuditEventType) == 12
+        assert len(AuditEventType) == 14

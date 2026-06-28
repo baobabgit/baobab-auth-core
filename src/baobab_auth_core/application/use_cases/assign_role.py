@@ -14,6 +14,7 @@ from baobab_auth_core.application.services.authorization_service import (
 from baobab_auth_core.domain.entities.user import User
 from baobab_auth_core.domain.enums.audit_event_type import AuditEventType
 from baobab_auth_core.domain.enums.audit_severity import AuditSeverity
+from baobab_auth_core.domain.policies.role_policy import RolePolicy
 from baobab_auth_core.domain.value_objects.role_name import RoleName
 from baobab_auth_core.domain.value_objects.user_id import UserId
 from baobab_auth_core.exceptions.authorization import ForbiddenError
@@ -54,6 +55,7 @@ class AssignRole:
         id_generator: IdGenerator,
         clock: Clock,
         uow: UnitOfWork,
+        role_policy: RolePolicy | None = None,
     ) -> None:
         """Initialise le cas d'usage avec ses dépendances injectées.
 
@@ -64,6 +66,7 @@ class AssignRole:
         :param id_generator: Générateur d'identifiants d'audit.
         :param clock: Horloge injectée.
         :param uow: Unité de travail transactionnelle.
+        :param role_policy: Politique de rôle (règles SUPER_ADMIN).
         :spec: BL-030-004
         """
         self._users = users
@@ -71,6 +74,7 @@ class AssignRole:
         self._authorization = authorization
         self._clock = clock
         self._uow = uow
+        self._policy = role_policy or RolePolicy()
         self._recorder = AuditRecorder(audit, id_generator, clock)
 
     def execute(self, command: AssignRoleCommand) -> None:
@@ -90,6 +94,11 @@ class AssignRole:
         role = self._roles.get_by_name(role_name)
         if role is None:
             raise RoleNotFoundError(f"Rôle introuvable : {role_name}.")
+
+        if not self._policy.can_assign_role(actor_context.roles, role.name):
+            raise ForbiddenError(
+                "Seul un SUPER_ADMIN peut attribuer le rôle SUPER_ADMIN."
+            )
 
         if target.has_role(role.name):
             return

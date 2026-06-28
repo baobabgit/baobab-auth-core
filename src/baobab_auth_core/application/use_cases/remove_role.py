@@ -97,6 +97,12 @@ class RemoveRole:
 
         target = self._get_target_user(command.target_user_id)
         role = self._get_role(command.role_name)
+
+        if not self._policy.can_remove_role(actor_context.roles, role.name):
+            raise ForbiddenError(
+                "Seul un SUPER_ADMIN peut retirer le rôle SUPER_ADMIN."
+            )
+
         if not target.has_role(role.name):
             return
 
@@ -161,7 +167,9 @@ class RemoveRole:
         :raises LastSuperAdminRoleRemovalError: Si le dernier super-admin est retiré.
         """
         users_with_role = self._roles.count_users_with_role(role.name)
-        if not self._policy.can_remove_role(role.name, users_with_role):
+        if not self._policy.permits_last_super_admin_removal(
+            role.name, users_with_role
+        ):
             raise LastSuperAdminRoleRemovalError(
                 "Impossible de retirer le dernier SUPER_ADMIN."
             )
