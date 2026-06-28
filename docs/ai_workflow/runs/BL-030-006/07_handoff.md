@@ -1,3 +1,5 @@
 # Handoff — BL-030-006
 
-En attente de `BL-030-001`.
+BL-030-006 terminé. Exceptions RBAC stabilisées et exportées.
+
+Prochain backlog : **BL-030-007** — compléter audit et tests RBAC.

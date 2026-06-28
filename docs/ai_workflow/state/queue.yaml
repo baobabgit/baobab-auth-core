@@ -152,7 +152,7 @@ queue:
     title: "Stabiliser exceptions RBAC"
     version_target: v0.3.0
     priority: P1
-    status: TODO
+    status: DONE
     depends_on: [BL-030-001]
   - id: BL-030-007
     title: "Compléter audit et tests RBAC"
