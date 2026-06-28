@@ -3,7 +3,7 @@ FEAT-030.8 — Documenter RBAC
 
 :Rattachée à: :ref:`us-030`
 :Backlog: ``BL-030-008``
-:Statut: TODO
+:Statut: DONE
 
 Description
 -----------
