@@ -23,10 +23,16 @@ from baobab_auth_core.exceptions.authorization import (
 )
 from baobab_auth_core.exceptions.base import BaobabAuthCoreError as BaobabAuthCoreError
 from baobab_auth_core.exceptions.role import (
+    LastAdminRoleRemovalError as LastAdminRoleRemovalError,
+)
+from baobab_auth_core.exceptions.role import (
     LastSuperAdminRoleRemovalError as LastSuperAdminRoleRemovalError,
 )
 from baobab_auth_core.exceptions.role import (
     PermissionNotFoundError as PermissionNotFoundError,
+)
+from baobab_auth_core.exceptions.role import (
+    RoleError as RoleError,
 )
 from baobab_auth_core.exceptions.role import (
     RoleNotFoundError as RoleNotFoundError,
@@ -79,9 +85,11 @@ __all__ = [
     "InvalidEmailError",
     "InvalidPermissionNameError",
     "InvalidRoleNameError",
+    "LastAdminRoleRemovalError",
     "LastSuperAdminRoleRemovalError",
     "PermissionDeniedError",
     "PermissionNotFoundError",
+    "RoleError",
     "RoleNotFoundError",
     "SessionExpiredError",
     "SessionNotFoundError",

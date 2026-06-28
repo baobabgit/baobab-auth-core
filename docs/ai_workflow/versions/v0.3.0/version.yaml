@@ -22,7 +22,7 @@ backlogs:
   - id: BL-030-005
     status: DONE
   - id: BL-030-006
-    status: TODO
+    status: DONE
   - id: BL-030-007
     status: TODO
   - id: BL-030-008

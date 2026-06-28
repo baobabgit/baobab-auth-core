@@ -12,7 +12,7 @@ from baobab_auth_core.domain.entities import AuditEvent, Permission, Role, Sessi
 from baobab_auth_core.domain.enums import AuditEventType, AuditSeverity, SessionStatus
 from baobab_auth_core.domain.policies import PasswordPolicy, PermissionPolicy, RolePolicy
 from baobab_auth_core.domain.value_objects import AuthSubject, PermissionName, RoleName
-from baobab_auth_core.exceptions import ForbiddenError, PermissionDeniedError
+from baobab_auth_core.exceptions import ForbiddenError, PermissionDeniedError, RoleError
 from baobab_auth_core.ports import PermissionRepository, RoleRepository, UserRepository
 from baobab_auth_core.testing import InMemoryPermissionRepository, InMemoryRoleRepository
 ```

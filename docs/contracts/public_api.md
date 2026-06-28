@@ -43,9 +43,11 @@
 | `InvalidEmailError` | Exception | `baobab_auth_core.exceptions` | BL-010-005 |
 | `InvalidPermissionNameError` | Exception | `baobab_auth_core.exceptions` | BL-010-005 |
 | `InvalidRoleNameError` | Exception | `baobab_auth_core.exceptions` | BL-010-005 |
-| `LastSuperAdminRoleRemovalError` | Exception | `baobab_auth_core.exceptions` | BL-010-005 / BL-030-003 |
+| `LastAdminRoleRemovalError` | Exception alias | `baobab_auth_core.exceptions` | BL-030-006 |
+| `LastSuperAdminRoleRemovalError` | Exception | `baobab_auth_core.exceptions` | BL-010-005 / BL-030-003 / BL-030-006 |
 | `PermissionDeniedError` | Exception | `baobab_auth_core.exceptions` | BL-010-005 |
 | `PermissionNotFoundError` | Exception | `baobab_auth_core.exceptions` | BL-010-005 |
+| `RoleError` | Exception | `baobab_auth_core.exceptions` | BL-030-006 |
 | `RoleNotFoundError` | Exception | `baobab_auth_core.exceptions` | BL-010-005 |
 | `SessionExpiredError` | Exception | `baobab_auth_core.exceptions` | BL-010-005 |
 | `SessionNotFoundError` | Exception | `baobab_auth_core.exceptions` | BL-010-005 |
