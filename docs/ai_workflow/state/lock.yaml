@@ -1,20 +1,13 @@
 # Verrou de travail global — mode stable séquentiel
 # Un seul outil peut travailler à un instant donné.
-#
-# Règles :
-#   locked: false → un outil peut démarrer.
-#   locked: true + expires_at dans le futur → aucun autre outil ne modifie le projet.
-#   locked: true + expires_at dépassé → verrou orphelin → procédure de recovery.
-#
-# Tout outil actif doit mettre à jour last_heartbeat_at et expires_at régulièrement.
 
 locked: true
-active_run: BL-030-006
+active_run: BL-030-007
 active_role: Développeur Python
 active_tool: cursor
-branch: bl/030-006-stabilize-rbac-exceptions
-locked_at: "2026-06-28T13:36:00Z"
-last_heartbeat_at: "2026-06-28T13:36:00Z"
-expires_at: "2026-06-28T15:36:00Z"
+branch: bl/030-007-complete-rbac-audit-tests
+locked_at: "2026-06-28T13:42:00Z"
+last_heartbeat_at: "2026-06-28T13:42:00Z"
+expires_at: "2026-06-28T15:42:00Z"
 lease_duration_minutes: 120
 status: IN_PROGRESS

@@ -158,7 +158,7 @@ queue:
     title: "Compléter audit et tests RBAC"
     version_target: v0.3.0
     priority: P1
-    status: TODO
+    status: DONE
     depends_on: [BL-030-002, BL-030-004, BL-030-005, BL-030-006]
   - id: BL-030-008
     title: "Documenter RBAC"
