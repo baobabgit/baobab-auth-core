@@ -8,7 +8,7 @@
 #   6. effort raisonnable
 #   7. absence de blocage d'intégration
 
-version_active: null
+version_active: v0.4.0
 
 queue:
   # ---- v0.1.0 (RELEASED) ----
@@ -166,3 +166,89 @@ queue:
     priority: P1
     status: DONE
     depends_on: [BL-030-001, BL-030-002, BL-030-003, BL-030-004, BL-030-005, BL-030-006, BL-030-007]
+
+  # ---- v0.4.0 (IN_DEVELOPMENT) — durcissement RBAC + conformité contractuelle ----
+  - id: BL-040-001
+    title: "Créer DefaultAuthCatalog"
+    version_target: v0.4.0
+    priority: P0
+    status: DONE
+    depends_on: []
+  - id: BL-040-002
+    title: "Implémenter les 10 permissions système"
+    version_target: v0.4.0
+    priority: P0
+    status: DONE
+    depends_on: [BL-040-001]
+  - id: BL-040-003
+    title: "Implémenter les 4 rôles système"
+    version_target: v0.4.0
+    priority: P0
+    status: DONE
+    depends_on: [BL-040-001, BL-040-002]
+  - id: BL-040-004
+    title: "Implémenter le mapping rôle vers permissions"
+    version_target: v0.4.0
+    priority: P0
+    status: DONE
+    depends_on: [BL-040-002, BL-040-003]
+  - id: BL-040-005
+    title: "Renforcer AssignRole pour SUPER_ADMIN"
+    version_target: v0.4.0
+    priority: P0
+    status: DONE
+    depends_on: [BL-040-003]
+  - id: BL-040-006
+    title: "Renforcer RemoveRole pour SUPER_ADMIN"
+    version_target: v0.4.0
+    priority: P0
+    status: DONE
+    depends_on: [BL-040-003]
+  - id: BL-040-007
+    title: "Harmoniser les exceptions de rôle"
+    version_target: v0.4.0
+    priority: P1
+    status: DONE
+    depends_on: []
+  - id: BL-040-008
+    title: "Ajouter JWK_ROTATION_REQUESTED"
+    version_target: v0.4.0
+    priority: P1
+    status: DONE
+    depends_on: [BL-040-005]
+  - id: BL-040-009
+    title: "Sécuriser les metadata d'audit"
+    version_target: v0.4.0
+    priority: P1
+    status: DONE
+    depends_on: []
+  - id: BL-040-010
+    title: "Harmoniser les ports pour futures briques"
+    version_target: v0.4.0
+    priority: P2
+    status: DONE
+    depends_on: []
+  - id: BL-040-011
+    title: "Ajouter les tests anti-dependances"
+    version_target: v0.4.0
+    priority: P1
+    status: DONE
+    depends_on: [BL-040-001]
+  - id: BL-040-012
+    title: "Documentation finale 0.4.0"
+    version_target: v0.4.0
+    priority: P1
+    status: DONE
+    depends_on: [BL-040-001, BL-040-002, BL-040-003, BL-040-004, BL-040-005, BL-040-006, BL-040-007, BL-040-008, BL-040-009, BL-040-010, BL-040-011]
+  - id: BL-040-013
+    title: "Durcir ChangePassword"
+    version_target: v0.4.0
+    priority: P1
+    status: DONE
+    depends_on: []
+  - id: BL-040-014
+    title: "Durcir RevokeAllSessions"
+    version_target: v0.4.0
+    priority: P1
+    status: DONE
+    depends_on: []
