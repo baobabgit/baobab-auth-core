@@ -1,35 +1,104 @@
 # Matrice de compatibilité inter-librairies
 # Mise à jour par le Release Manager lors de chaque validation d'intégration.
 #
-# Côté librairie PRODUCTRICE (ce package expose des services à d'autres) :
-#
-# library: example-package
-# version: v0.1.0
-# validated_consumers: []
-#
-# Côté librairie CONSOMMATRICE (ce package dépend d'autres librairies) :
-#
-# library: example-package
-# version: v0.1.0
-# validated_dependencies: []
+# Côté PRODUCTEUR : baobab-auth-core expose des contrats à des briques aval.
+# La validation se fait par git-ref sur la branche version/vX.Y.Z (aucune
+# publication TestPyPI requise) ; chaque consommateur reporte PASSED/FAILED ici
+# et produit un rapport dans docs/integrations/reports/.
 
-library: example-package
-version: v0.1.0
+library: baobab-auth-core
+version: v0.5.0
 
-validated_consumers: []
-# Exemple :
-# - name: baobab-example-consumer
-#   version: v0.3.0
-#   status: PASSED
-#   report: docs/integrations/reports/example-package-v0.1.0__example-consumer-v0.3.0.md
+# Jalon : v0.5.0 stabilise les contrats publics (« pré-intégration »).
+# C'est la première version contre laquelle l'intégration des briques aval doit
+# être validée. Sur PyPI, l'artefact correspondant est 0.5.1 (le nom de fichier
+# 0.5.0 étant brûlé) ; la validation par git-ref utilise version/v0.5.0.
+#
+# Ordre de validation imposé par les dépendances de contrat (cahier v0.5.0
+# §7→§11) : database -> security -> api -> client -> admin.
+#
+# NB : les noms de paquets ci-dessous suivent la convention baobab-auth-* et
+# restent à confirmer côté consommateurs.
 
+validated_consumers:
+  - order: 1
+    name: baobab-auth-database
+    contract: database
+    version: PENDING
+    status: PENDING
+    integration_method: git_ref
+    ref: version/v0.5.0
+    validation_type:
+      - import_tests
+      - contract_tests
+      - integration_tests
+    report: null
+    notes: >
+      Implémente les ports *Repository et UnitOfWork ; seed via DefaultAuthCatalog.
+
+  - order: 2
+    name: baobab-auth-security
+    contract: security
+    version: PENDING
+    status: PENDING
+    integration_method: git_ref
+    ref: version/v0.5.0
+    validation_type:
+      - import_tests
+      - contract_tests
+      - integration_tests
+    report: null
+    notes: >
+      Implémente PasswordHasher et TokenProvider ; consomme TokenIssueContext /
+      TokenClaims / TokenPair (sub=AuthSubject, jti=TokenId, sid=SessionId).
+
+  - order: 3
+    name: baobab-auth-api
+    contract: api
+    version: PENDING
+    status: PENDING
+    integration_method: git_ref
+    ref: version/v0.5.0
+    validation_type:
+      - import_tests
+      - contract_tests
+      - integration_tests
+    report: null
+    notes: >
+      Un cas d'usage par endpoint ; mappe error_code/http_status, ne renvoie
+      jamais d'HTTPException. Dépend de database + security.
+
+  - order: 4
+    name: baobab-auth-client
+    contract: client
+    version: PENDING
+    status: PENDING
+    integration_method: git_ref
+    ref: version/v0.5.0
+    validation_type:
+      - import_tests
+      - contract_tests
+    report: null
+    notes: >
+      Consomme AuthContext / AuthenticatedUser / TokenClaims ; ne recalcule pas
+      les permissions depuis les rôles.
+
+  - order: 5
+    name: baobab-auth-admin
+    contract: admin
+    version: PENDING
+    status: PENDING
+    integration_method: git_ref
+    ref: version/v0.5.0
+    validation_type:
+      - import_tests
+      - contract_tests
+      - integration_tests
+    report: null
+    notes: >
+      Outillage admin : BootstrapSuperAdmin, Disable/EnableUser,
+      RequestJwkRotation, ListRoles / ListPermissions / ListUserSessions.
+
+# Côté CONSOMMATEUR : baobab-auth-core ne dépend d'aucune autre librairie
+# baobab (librairie de socle, pure).
 validated_dependencies: []
-# Exemple :
-# - name: baobab-example-core
-#   version: v0.5.0
-#   status: PASSED
-#   validation_type:
-#     - import_tests
-#     - contract_tests
-#     - integration_tests
-#   report: docs/integrations/reports/example-core-v0.5.0__example-package-v0.1.0.md
