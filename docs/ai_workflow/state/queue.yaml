@@ -146,7 +146,7 @@ queue:
     title: "Stabiliser RemoveRole"
     version_target: v0.3.0
     priority: P0
-    status: TODO
+    status: DONE
     depends_on: [BL-030-001, BL-030-002, BL-030-003, BL-030-004]
   - id: BL-030-006
     title: "Stabiliser exceptions RBAC"

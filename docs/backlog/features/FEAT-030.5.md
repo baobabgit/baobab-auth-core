@@ -5,7 +5,7 @@
 | Rattachée à | [US-030](../user_stories/US-030.md) |
 | Backlog | [BL-030-005](../backlogs/BL-030-005.md) |
 | Priorité | P0 |
-| Statut | TODO |
+| Statut | DONE ✅ |
 | Spec dérivée | [`FEAT-030.5`](../../specifications/us/US-030-rbac-authorization/FEAT-030.5-remove-role.rst) |
 
 ## Livrables
