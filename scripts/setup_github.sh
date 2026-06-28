@@ -35,8 +35,10 @@ if gh api --method POST "repos/${REPO}/rulesets" --input - >/dev/null 2>&1 <<'JS
       "parameters": {
         "strict_required_status_checks_policy": true,
         "required_status_checks": [
-          {"context": "lint"}, {"context": "type"}, {"context": "security"},
-          {"context": "test (3.11)"}, {"context": "test (3.12)"}, {"context": "test (3.13)"}
+          {"context": "Qualité + Typage + Sécurité"},
+          {"context": "Tests + couverture ≥ 95 %"},
+          {"context": "Traçabilité (specs → backlog → runs)"},
+          {"context": "Build package"}
         ]
       }
     }

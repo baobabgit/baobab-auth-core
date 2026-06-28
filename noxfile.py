@@ -13,7 +13,9 @@ def quality(session: nox.Session) -> None:
     session.run("uv", "run", "black", "--check", "src", "tests", external=True)
     session.run("uv", "run", "ruff", "check", "src", "tests", external=True)
     session.run("uv", "run", "mypy", "src", external=True)
-    session.run("uv", "run", "bandit", "-r", "src", "-c", "pyproject.toml", external=True)
+    session.run(
+        "uv", "run", "bandit", "-r", "src", "-c", "pyproject.toml", external=True
+    )
 
 
 @nox.session
@@ -37,9 +39,18 @@ def build(session: nox.Session) -> None:
     session.run("uv", "run", "twine", "check", "dist/*", external=True)
 
 
+@nox.session
+def traceability(session: nox.Session) -> None:
+    """Vérifie la chaîne de traçabilité besoin → backlog → run."""
+    session.run(
+        "uv", "run", "python", "scripts/check_traceability.py", external=True
+    )
+
+
 @nox.session(name="all")
 def all_checks(session: nox.Session) -> None:
-    """Exécute quality + tests + build (cible de validation complète)."""
+    """Exécute quality + tests + build + traçabilité (validation complète)."""
     quality(session)
     tests(session)
     build(session)
+    traceability(session)

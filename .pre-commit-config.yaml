@@ -56,3 +56,11 @@ repos:
         pass_filenames: false
         always_run: true
         stages: [pre-push]
+
+      - id: check-traceability
+        name: Traçabilité (specs → backlog → runs)
+        entry: uv run python scripts/check_traceability.py
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]
