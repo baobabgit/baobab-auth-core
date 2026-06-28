@@ -1,8 +1,8 @@
 id: BL-030-002
 title: "Implémenter AuthorizationService"
-status: IN_REVIEW
-step: review
+status: DONE
+step: merge
 role: Reviewer technique
 started_at: "2026-06-28"
-completed_at: null
-last_heartbeat_at: "2026-06-28T11:11:07Z"
+completed_at: "2026-06-28"
+last_heartbeat_at: "2026-06-28T11:15:53Z"
