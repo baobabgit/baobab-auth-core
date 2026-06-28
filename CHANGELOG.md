@@ -97,6 +97,16 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
   provenance (supply chain), upload SARIF tolérant (repo privé sans GHAS).
 - `docs/workflow/SETUP.md` : checklist de configuration GitHub one-time (commandes `gh`).
 
+## [0.4.1] - 2026-06-28
+
+### Corrigé
+
+- **Republication packaging** : la version `0.4.0` ne peut pas être publiée sur
+  PyPI car ce nom de fichier y a déjà été utilisé puis supprimé (PyPI interdit
+  définitivement la réutilisation, cf. *file-name-reuse*). `0.4.1` republie le
+  **même code** que `0.4.0` sous un numéro de version disponible. Aucun
+  changement fonctionnel.
+
 ## [0.4.0] - 2026-06-28
 
 ### Ajouté
