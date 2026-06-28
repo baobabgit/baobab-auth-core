@@ -20,6 +20,7 @@ class AuditEventType(StrEnum):
     :cvar PASSWORD_CHANGED: Mot de passe modifié.
     :cvar ACCOUNT_LOCKED: Compte verrouillé suite à trop d'échecs.
     :cvar ACCOUNT_DISABLED: Compte désactivé par un administrateur.
+    :cvar ACCOUNT_ENABLED: Compte réactivé par un administrateur.
     :cvar ACCOUNT_DELETED: Compte supprimé.
     :cvar ALL_SESSIONS_REVOKED: Toutes les sessions d'un utilisateur révoquées.
     :cvar JWK_ROTATION_REQUESTED: Demande de rotation des clés JWK (critique).
@@ -37,5 +38,6 @@ class AuditEventType(StrEnum):
     PASSWORD_CHANGED = "PASSWORD_CHANGED"  # nosec B105
     ACCOUNT_LOCKED = "ACCOUNT_LOCKED"
     ACCOUNT_DISABLED = "ACCOUNT_DISABLED"
+    ACCOUNT_ENABLED = "ACCOUNT_ENABLED"
     ACCOUNT_DELETED = "ACCOUNT_DELETED"
     JWK_ROTATION_REQUESTED = "JWK_ROTATION_REQUESTED"

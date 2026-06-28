@@ -18,6 +18,7 @@ class TestAuditEventType:
             "PASSWORD_CHANGED",
             "ACCOUNT_LOCKED",
             "ACCOUNT_DISABLED",
+            "ACCOUNT_ENABLED",
             "ACCOUNT_DELETED",
             "JWK_ROTATION_REQUESTED",
         }
@@ -33,4 +34,4 @@ class TestAuditEventType:
         assert AuditEventType.ALL_SESSIONS_REVOKED == "ALL_SESSIONS_REVOKED"
 
     def test_BL_010_004_3_count(self) -> None:
-        assert len(AuditEventType) == 14
+        assert len(AuditEventType) == 15

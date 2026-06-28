@@ -159,6 +159,22 @@ assign.execute(
 
 Voir le guide détaillé : [`docs/guides/rbac.rst`](docs/guides/rbac.rst).
 
+### Contrats publics (v0.5.0)
+
+L'API publique est exportée de façon exhaustive dans `baobab_auth_core.__all__`
+(entités, value objects, enums, policies, `DefaultAuthCatalog`, ports, DTO et cas
+d'usage). Chaque exception publique fournit `error_code`, `safe_message` et un
+`http_status` recommandé — sans dépendance web. Les cas d'usage de lecture
+(`GetCurrentUser`, `ListRoles`, `ListPermissions`, `ListUserSessions`…) et admin
+(`DisableUser`, `EnableUser`, `BootstrapSuperAdmin`, `RequestJwkRotation`)
+préparent l'intégration des briques `database`, `security`, `api`, `client` et
+`admin`.
+
+Voir les guides : [`public_api`](docs/guides/public_api.rst),
+[`error_codes`](docs/guides/error_codes.rst),
+[`contracts`](docs/guides/contracts.rst),
+[`versioning`](docs/guides/versioning.rst).
+
 ## Qualité
 
 Toutes les vérifications s'exécutent via `make all` (ou `uv run nox -s all`) :
