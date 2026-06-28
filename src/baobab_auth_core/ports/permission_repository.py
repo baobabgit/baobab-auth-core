@@ -43,3 +43,10 @@ class PermissionRepository(Protocol):
         :returns: Liste des permissions.
         """
         ...
+
+    def list_permissions(self) -> tuple[Permission, ...]:
+        """Liste toutes les permissions.
+
+        :returns: Tuple des permissions.
+        """
+        ...

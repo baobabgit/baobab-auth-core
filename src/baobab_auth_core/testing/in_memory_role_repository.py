@@ -14,6 +14,7 @@ class InMemoryRoleRepository:
     def __init__(self) -> None:
         """Initialise le dépôt avec un stockage vide."""
         self._store: dict[str, Role] = {}
+        self._user_counts: dict[str, int] = {}
 
     def get_by_id(self, role_id: RoleId) -> Role | None:
         """Récupère un rôle par son identifiant.
@@ -46,8 +47,35 @@ class InMemoryRoleRepository:
 
         :returns: Liste des rôles.
         """
-        return list(self._store.values())
+        return list(self.list_roles())
+
+    def list_roles(self) -> tuple[Role, ...]:
+        """Liste tous les rôles.
+
+        :returns: Tuple des rôles.
+        """
+        return tuple(self._store.values())
+
+    def count_users_with_role(self, name: RoleName) -> int:
+        """Compte les utilisateurs portant un rôle.
+
+        :param name: Nom du rôle.
+        :returns: Nombre d'utilisateurs portant ce rôle.
+        """
+        return self._user_counts.get(name.value, 0)
+
+    def set_users_with_role_count(self, name: RoleName, count: int) -> None:
+        """Configure le nombre d'utilisateurs portant un rôle.
+
+        :param name: Nom du rôle.
+        :param count: Nombre d'utilisateurs à exposer.
+        :raises ValueError: Si ``count`` est négatif.
+        """
+        if count < 0:
+            raise ValueError("count doit être supérieur ou égal à zéro.")
+        self._user_counts[name.value] = count
 
     def clear(self) -> None:
         """Vide le dépôt."""
         self._store.clear()
+        self._user_counts.clear()

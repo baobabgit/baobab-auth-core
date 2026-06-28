@@ -43,3 +43,18 @@ class RoleRepository(Protocol):
         :returns: Liste des rôles.
         """
         ...
+
+    def list_roles(self) -> tuple[Role, ...]:
+        """Liste tous les rôles.
+
+        :returns: Tuple des rôles.
+        """
+        ...
+
+    def count_users_with_role(self, name: RoleName) -> int:
+        """Compte les utilisateurs portant un rôle.
+
+        :param name: Nom du rôle.
+        :returns: Nombre d'utilisateurs assignés à ce rôle.
+        """
+        ...

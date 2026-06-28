@@ -28,3 +28,19 @@ class TestRolePolicy:
         p = RolePolicy()
         with pytest.raises(dataclasses.FrozenInstanceError):
             p.enforce_last_super_admin = False  # type: ignore[misc]
+
+    def test_BL_030_003_1_allows_non_super_admin_removal(self) -> None:
+        p = RolePolicy()
+        assert p.can_remove_role(RoleName("ADMIN"), users_with_role=1) is True
+
+    def test_BL_030_003_2_blocks_last_super_admin_removal(self) -> None:
+        p = RolePolicy()
+        assert p.can_remove_role(RoleName("SUPER_ADMIN"), users_with_role=1) is False
+
+    def test_BL_030_003_3_allows_super_admin_removal_when_others_remain(self) -> None:
+        p = RolePolicy()
+        assert p.can_remove_role(RoleName("SUPER_ADMIN"), users_with_role=2) is True
+
+    def test_BL_030_003_4_can_disable_last_super_admin_protection(self) -> None:
+        p = RolePolicy(enforce_last_super_admin=False)
+        assert p.can_remove_role(RoleName("SUPER_ADMIN"), users_with_role=1) is True

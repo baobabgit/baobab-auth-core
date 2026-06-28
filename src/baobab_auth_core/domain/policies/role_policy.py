@@ -28,3 +28,16 @@ class RolePolicy:
         default_factory=lambda: RoleName(_SUPER_ADMIN_ROLE)
     )
     enforce_last_super_admin: bool = field(default=True)
+
+    def can_remove_role(self, role_name: RoleName, users_with_role: int) -> bool:
+        """Indique si un rôle peut être retiré sans violer la politique.
+
+        :param role_name: Nom du rôle à retirer.
+        :param users_with_role: Nombre d'utilisateurs qui portent ce rôle.
+        :returns: ``True`` si le retrait est autorisé.
+        """
+        if not self.enforce_last_super_admin:
+            return True
+        if role_name != self.super_admin_role_name:
+            return True
+        return users_with_role > 1
