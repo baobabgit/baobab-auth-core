@@ -21,6 +21,8 @@ class AuditEventType(StrEnum):
     :cvar ACCOUNT_LOCKED: Compte verrouillé suite à trop d'échecs.
     :cvar ACCOUNT_DISABLED: Compte désactivé par un administrateur.
     :cvar ACCOUNT_DELETED: Compte supprimé.
+    :cvar ALL_SESSIONS_REVOKED: Toutes les sessions d'un utilisateur révoquées.
+    :cvar JWK_ROTATION_REQUESTED: Demande de rotation des clés JWK (critique).
     """
 
     USER_REGISTERED = "USER_REGISTERED"
@@ -29,9 +31,11 @@ class AuditEventType(StrEnum):
     LOGOUT = "LOGOUT"
     SESSION_REFRESHED = "SESSION_REFRESHED"
     SESSION_REVOKED = "SESSION_REVOKED"
+    ALL_SESSIONS_REVOKED = "ALL_SESSIONS_REVOKED"
     ROLE_ASSIGNED = "ROLE_ASSIGNED"
     ROLE_REMOVED = "ROLE_REMOVED"
     PASSWORD_CHANGED = "PASSWORD_CHANGED"  # nosec B105
     ACCOUNT_LOCKED = "ACCOUNT_LOCKED"
     ACCOUNT_DISABLED = "ACCOUNT_DISABLED"
     ACCOUNT_DELETED = "ACCOUNT_DELETED"
+    JWK_ROTATION_REQUESTED = "JWK_ROTATION_REQUESTED"

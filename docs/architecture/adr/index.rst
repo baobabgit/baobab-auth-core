@@ -37,6 +37,15 @@ Index des décisions d'architecture de ``baobab-auth-core``.
    * - :doc:`0009 <0009-rbac-authcontext-authorization-service>`
      - RBAC applicatif pur et ``AuthContext`` immutable
      - Accepté
+   * - :doc:`0010 <0010-default-auth-catalog>`
+     - Catalogue d'autorisation par défaut (``DefaultAuthCatalog``)
+     - Accepté
+   * - :doc:`0011 <0011-role-policy-super-admin>`
+     - ``RolePolicy`` renforcée et règles strictes ``SUPER_ADMIN``
+     - Accepté
+   * - :doc:`0012 <0012-change-password-revoke-all-sessions>`
+     - Création de ``ChangePassword`` et ``RevokeAllSessions``
+     - Accepté
 
 .. toctree::
    :maxdepth: 1
@@ -51,3 +60,6 @@ Index des décisions d'architecture de ``baobab-auth-core``.
    0007-extension-token-provider-refresh
    0008-authcontext-minimal-en-0-2-0
    0009-rbac-authcontext-authorization-service
+   0010-default-auth-catalog
+   0011-role-policy-super-admin
+   0012-change-password-revoke-all-sessions
