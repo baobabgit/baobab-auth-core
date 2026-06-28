@@ -96,9 +96,8 @@ jobs:
     needs: build
     permissions:
       contents: write
-    steps:      
+    steps:
       - uses: actions/download-artifact@v8
-      - uses: actions/checkout@v7      
         with:
           name: dist
           path: dist/
