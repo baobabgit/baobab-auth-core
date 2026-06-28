@@ -27,12 +27,14 @@ class PermissionName:
 
         :raises InvalidPermissionNameError: Si invalide.
         """
-        parts = self.value.split(":")
+        normalized = self.value.strip().lower()
+        parts = normalized.split(":")
         if len(parts) != _EXPECTED_PARTS or any(p.strip() == "" for p in parts):
             raise InvalidPermissionNameError(
                 f"Le nom de permission doit respecter le format "
                 f"'scope:resource:action' : '{self.value}'"
             )
+        object.__setattr__(self, "value", normalized)
 
     def __str__(self) -> str:
         """Retourne la valeur de la permission.

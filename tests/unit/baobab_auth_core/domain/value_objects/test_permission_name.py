@@ -36,3 +36,7 @@ class TestPermissionName:
 
     def test_BL_010_002_8_repr(self) -> None:
         assert "a:b:c" in repr(PermissionName("a:b:c"))
+
+    def test_BL_030_003_1_normalizes_strip_and_lowercase(self) -> None:
+        permission = PermissionName(" AUTH:User:Read ")
+        assert permission.value == "auth:user:read"
