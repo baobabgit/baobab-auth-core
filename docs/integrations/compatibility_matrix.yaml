@@ -1,35 +1,105 @@
 # Matrice de compatibilité inter-librairies
 # Mise à jour par le Release Manager lors de chaque validation d'intégration.
 #
-# Côté librairie PRODUCTRICE (ce package expose des services à d'autres) :
-#
-# library: example-package
-# version: v0.1.0
-# validated_consumers: []
-#
-# Côté librairie CONSOMMATRICE (ce package dépend d'autres librairies) :
-#
-# library: example-package
-# version: v0.1.0
-# validated_dependencies: []
+# Côté PRODUCTEUR : baobab-auth-core expose des contrats à des briques aval.
+# Validation par git-ref sur version/vX.Y.Z ; chaque consommateur reporte
+# PASSED/FAILED ici + rapport dans docs/integrations/reports/.
 
-library: example-package
-version: v0.1.0
+library: baobab-auth-core
+version: v0.5.1
 
-validated_consumers: []
-# Exemple :
-# - name: baobab-example-consumer
-#   version: v0.3.0
-#   status: PASSED
-#   report: docs/integrations/reports/example-package-v0.1.0__example-consumer-v0.3.0.md
+# Jalon v0.5.1 : republication PyPI de v0.5.0 (même code).
+# Ordre de validation : database → security → api → client → admin.
+# INTEGRATION_VALIDATED lorsque les 5 consommateurs required ont PASSED.
+
+validated_consumers:
+  - order: 1
+    name: baobab-auth-database
+    contract: database
+    version: v0.1.0
+    status: PASSED
+    required: true
+    integration_method: git_ref
+    ref: version/v0.1.0
+    validated_at: "2026-06-29"
+    validation_type:
+      - import_tests
+      - contract_tests
+      - integration_tests
+    report: docs/integrations/reports/baobab-auth-core-v0.5.1__baobab-auth-database-v0.1.0.md
+    validated_features:
+      - UserRepository
+      - RoleRepository
+      - PermissionRepository
+      - SessionRepository
+      - AuditRepository
+      - UnitOfWork
+      - DefaultAuthCatalog
+    notes: >
+      Premier consommateur validé. MVP baobab-auth-database v0.1.0
+      INTERNAL_VALIDATED ; dépendance PyPI baobab-auth-core>=0.5.1,<0.6.0.
+
+  - order: 2
+    name: baobab-auth-security
+    contract: security
+    version: PENDING
+    status: PENDING
+    required: true
+    integration_method: git_ref
+    ref: version/v0.5.1
+    validation_type:
+      - import_tests
+      - contract_tests
+      - integration_tests
+    report: null
+    notes: >
+      PasswordHasher, TokenProvider ; TokenIssueContext / TokenClaims / TokenPair.
+
+  - order: 3
+    name: baobab-auth-api
+    contract: api
+    version: PENDING
+    status: PENDING
+    required: true
+    integration_method: git_ref
+    ref: version/v0.5.1
+    validation_type:
+      - import_tests
+      - contract_tests
+      - integration_tests
+    report: null
+    notes: >
+      Cas d'usage par endpoint ; dépend de database + security.
+
+  - order: 4
+    name: baobab-auth-client
+    contract: client
+    version: PENDING
+    status: PENDING
+    required: true
+    integration_method: git_ref
+    ref: version/v0.5.1
+    validation_type:
+      - import_tests
+      - contract_tests
+    report: null
+    notes: >
+      AuthContext / AuthenticatedUser / TokenClaims.
+
+  - order: 5
+    name: baobab-auth-admin
+    contract: admin
+    version: PENDING
+    status: PENDING
+    required: true
+    integration_method: git_ref
+    ref: version/v0.5.1
+    validation_type:
+      - import_tests
+      - contract_tests
+      - integration_tests
+    report: null
+    notes: >
+      BootstrapSuperAdmin, Disable/EnableUser, RequestJwkRotation, listes admin.
 
 validated_dependencies: []
-# Exemple :
-# - name: baobab-example-core
-#   version: v0.5.0
-#   status: PASSED
-#   validation_type:
-#     - import_tests
-#     - contract_tests
-#     - integration_tests
-#   report: docs/integrations/reports/example-core-v0.5.0__example-package-v0.1.0.md
