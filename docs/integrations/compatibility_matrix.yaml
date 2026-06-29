@@ -16,17 +16,18 @@ validated_consumers:
   - order: 1
     name: baobab-auth-database
     contract: database
-    version: v0.1.0
+    version: v0.2.0
     status: PASSED
     required: true
     integration_method: git_ref
-    ref: version/v0.1.0
-    validated_at: "2026-06-29"
+    ref: version/v0.2.0
+    validated_at: "2026-06-28"
     validation_type:
       - import_tests
       - contract_tests
       - integration_tests
-    report: docs/integrations/reports/baobab-auth-core-v0.5.1__baobab-auth-database-v0.1.0.md
+      - catalog_diagnostics_tests
+    report: docs/integrations/reports/baobab-auth-core-v0.5.1__baobab-auth-database-v0.2.0.md
     validated_features:
       - UserRepository
       - RoleRepository
@@ -35,9 +36,16 @@ validated_consumers:
       - AuditRepository
       - UnitOfWork
       - DefaultAuthCatalog
+      - AuthCatalogChecksum
+      - AuthCatalogDiagnostics
+      - catalog check seed report CLI
+      - auth_catalog_versions persistence
+      - SERVICE role without permissions
+      - SUPER_ADMIN all core permissions
     notes: >
-      Premier consommateur validé. MVP baobab-auth-database v0.1.0
-      INTERNAL_VALIDATED ; dépendance PyPI baobab-auth-core>=0.5.1,<0.6.0.
+      MVP v0.1.0 puis catalogue versionné v0.2.0 (profil core_051).
+      Dépendance PyPI baobab-auth-core>=0.5.1,<0.6.0.
+      Rapport v0.1.0 : baobab-auth-core-v0.5.1__baobab-auth-database-v0.1.0.md
 
   - order: 2
     name: baobab-auth-security
