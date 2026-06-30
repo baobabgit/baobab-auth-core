@@ -50,18 +50,37 @@ validated_consumers:
   - order: 2
     name: baobab-auth-security
     contract: security
-    version: PENDING
-    status: PENDING
+    version: v0.1.0
+    status: PASSED
     required: true
     integration_method: git_ref
-    ref: version/v0.5.1
+    ref: version/v0.1.0
+    validated_at: "2026-06-30"
     validation_type:
       - import_tests
       - contract_tests
       - integration_tests
-    report: null
+    report: docs/integrations/reports/baobab-auth-core-v0.5.1__baobab-auth-security-v0.1.0.md
+    validated_features:
+      - PasswordHasher
+      - TokenProvider
+      - TokenClaims
+      - TokenPair
+      - TokenId
+      - PlainPassword
+      - PasswordHash
+      - TokenInvalidError
+      - TokenExpiredError
+      - CorePasswordHasherAdapter
+      - CoreTokenProviderAdapter
+      - CoreClaimsMapper
+      - CoreTokenPairMapper
+      - CoreRevocationAdapter
     notes: >
-      PasswordHasher, TokenProvider ; TokenIssueContext / TokenClaims / TokenPair.
+      Argon2id, JWT RS256, refresh opaques, JWKS local, adaptateurs ports réels
+      synchrones. Dépendance PyPI baobab-auth-core>=0.4.0,<1.0.0.
+      Rapport consommateur : baobab-auth-security
+      docs/integrations/reports/baobab-auth-core-v0.5.1__baobab-auth-security-v0.1.0.md
 
   - order: 3
     name: baobab-auth-api
